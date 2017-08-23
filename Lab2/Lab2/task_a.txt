@@ -1,0 +1,80 @@
+.include "m2560def.inc"
+
+.def dd1 r15
+.def dd2 r16
+.def ds1 r17
+.def ds2 r18
+.def q1 r19
+.def q2 r20
+.def pos r21
+.equ limit 128
+.def bit_p1 r22
+.def bit_p2 r23
+.def empty, r24
+
+.macro doubleNum
+	lsl @0
+	rol @1
+.endmacro
+
+.macro halvedNum
+	lsl @0
+	rol @1
+.endmacro
+
+.dseg
+
+.cseg
+.org 0x100
+ldi r22, 1
+clr r23
+
+foo:
+	push r28
+	push r29
+	in r28, SPL
+	in r29, SPH
+	sbiw, 6
+	OUT SPH, r29
+	OUT SPL, r28
+	std Y+1, r15
+	std Y+2, r16
+	std Y+3, r17
+	std Y+4, r18
+	std Y+5, r19
+	std Y+6, r20
+	clr r20
+	clr r19
+
+loop1:
+	cp ds1, dd1
+	cpc ds2, dd2
+	brsh loop1done:
+	cpi ds2, limit
+	brsh loop1done:
+	doubleNum ds1, ds2
+	doubleNum bit_p1, bit_p2
+	rjmp loop1
+
+loop1done:
+	clr q1
+	clr q2
+	clr empty
+loop2:
+	cp empty, bit_p1
+	cpc empty, bit_p2
+	brsh loop2done
+	ifsta:
+		cp ds1, dd1
+		cpc ds2, dd2
+		brsh ifdone
+		sub dd1, ds1
+		sub dd2, ds2
+		add q1, bit_p1
+		add q2, bit_p2
+	ifdone:
+	halvedNum ds1, ds2
+	halvedNum dd1, dd2
+	rjmp loop2
+loop2done:
+rjmp loop2done
