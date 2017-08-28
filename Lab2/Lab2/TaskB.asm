@@ -16,7 +16,7 @@
 .def tmp1=r9
 .def tmp2=r10
 
-.macro multiplication
+.macro multiplication ; multiply
 	mov @1 ,@3 ; copy r24 to r18  @1 and @2 is num_before
 	mov @2 ,@4 ; copy r25 to r19
 	mul @0, @1 ; @0 is number
@@ -35,6 +35,10 @@ A: .byte n
 initial:
 	ldi xl,low(A)
 	ldi xh,high(A)
+	ldi yl,low(RAMEND)
+	ldi yh,high(RAMEND)
+	out SPL,yl
+	out SPH,yh
 	clr i
 	clr res_l
 	clr res_h
@@ -45,13 +49,16 @@ initial:
 main:
 
 forloop1:
-	cpi n, i
-	brlo forloop1_done
+	mov r21, i
+	cpi r21, n
+	brsh forloop1_done
+	clr r21
 	
 	st x, i
 	;get result from power
-	ldi res_l, r24
-	ldi res_h, r25
+	rcall power
+	mov res_l, r24
+	mov res_h, r25
 	
 	ld r21, x+
 	mul r21,res_l
@@ -71,26 +78,31 @@ end_main: rjmp end_main
 
 power:
 ;-----------Prologue------------
-push r28
-push r29
-in r28, SPL
-in r29, SPH
-sbiw r28, 3
-out SPL, r28
-out SPH, r29
+push yl
+push yh
+in yl, SPL
+in yh, SPH
+sbiw y, 3
+out SPL, yl
+out SPH, yh
 std Y+1, sum_0
 std Y+2, sum_1
 std Y+3, sum_2
 ;-----------main Function-------
-ldi r18, i
+mov r18, i
 clr r19
 clr r20
 clr r24
 clr r25
 loop:
-	cpi r18, i
+	cp r18, i
 	brsh loopdone
-	multiplication x, r19, r20, r24, r25
+	mov r11,r21
+	ld r21, x
+	multiplication r21, r19, r20, r24, r25
+	st x, r21
+	mov r21,r11
+	clr r11
 	inc r18
 	jmp loop
 loopdone:
@@ -99,9 +111,9 @@ loopdone:
 	ldd sum_0, Y+1
 	ldd sum_1, Y+2
 	ldd sum_2, Y+3
-	adiw r28,3
-	out SPH, r29
-	out SPL, r28
+	adiw y,3
+	out SPH, yh
+	out SPL, yl
 	pop r29
 	pop r28
 	ret
