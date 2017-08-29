@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Mon Aug 28 22:01:15 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Tue Aug 29 18:18:25 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
@@ -1904,14 +1904,20 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including
                                  .def tmp1=r9
                                  .def tmp2=r10
                                  
+                                 
+                                 ;@0 const to multiply with
+                                 ;@1 temp to stored previous
+                                 ;@2 value of result
+                                 ;@3 resultl
+                                 ;@4 resulth
                                  .macro multiplication ; multiply
-                                 	mov @1 ,@3 ; copy r24 to r18  @1 and @2 is num_before
-                                 	mov @2 ,@4 ; copy r25 to r19
-                                 	mul @0, @1 ; @0 is number
+                                 	mov @1 ,@3 
+                                 	mov @2 ,@4
+                                 	mul @0, @1
                                  	mov @3, r0 
                                  	mov @4, r1 
                                  	mul @0, @2
-                                 	add @4, r0 ; put the result in r24, r25
+                                 	add @4, r0
                                  
                                  .endmacro
                                  
@@ -1968,6 +1974,7 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including
                                  ;-----------Prologue------------
 00001e 93cf                      push yl
 00001f 93df                      push yh
+                                 
 000020 b7cd                      in yl, SPL
 000021 b7de                      in yh, SPH
 000022 9723                      sbiw y, 3
@@ -1977,40 +1984,46 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including
 000026 833a                      std Y+2, sum_1
 000027 834b                      std Y+3, sum_2
                                  ;-----------main Function-------
-000028 2d28                      mov r18, i
-000029 2733                      clr r19
-00002a 2744                      clr r20
-00002b 2788                      clr r24
-00002c 2799                      clr r25
+                                 ;power is r8 (global i)
+                                 
+                                 ;number is r11
+000028 e033                      ldi r19, x_const ;store x_const
+000029 2eb3                      mov r11, r19 ; in a empty register
+                                 
+00002a 2733                      clr r19 ; templ
+00002b 2744                      clr r20 ; temph
+                                 
+00002c 2722                      clr r18
+00002d e021                      ldi r18,1 ;r18 is function i
+                                 
+00002e 2788                      clr r24 ; numl
+00002f 2799                      clr r25 ; numh
+000030 e081                      ldi r24,1 ;num = 1
+                                 
                                  loop:
-00002d 1528                      	cp r18, i
-00002e f478                      	brsh loopdone
-00002f 2eb5                      	mov r11,r21
-000030 915c                      	ld r21, x
-000031 2f38
-000032 2f49
-000033 9f53
-000034 2d80
-000035 2d91
-000036 9f54
-000037 0d90                      	multiplication r21, r19, r20, r24, r25
-000038 935c                      	st x, r21
-000039 2d5b                      	mov r21,r11
-00003a 24bb                      	clr r11
-00003b 9523                      	inc r18
-00003c 940c 002d                 	jmp loop
+000031 1682                      	cp i, r18
+000032 f050                      	brlo loopdone
+000033 2f38
+000034 2f49
+000035 9eb3
+000036 2d80
+000037 2d91
+000038 9eb4
+000039 0d90                      	multiplication r11, r19, r20, r24, r25
+00003a 9523                      	inc r18
+00003b 940c 0031                 	jmp loop
                                  loopdone:
                                  
                                  ;-----------Epilogue------------
-00003e 8129                      	ldd sum_0, Y+1
-00003f 813a                      	ldd sum_1, Y+2
-000040 814b                      	ldd sum_2, Y+3
-000041 9623                      	adiw y,3
-000042 bfde                      	out SPH, yh
-000043 bfcd                      	out SPL, yl
-000044 91df                      	pop r29
-000045 91cf                      	pop r28
-000046 9508                      	ret
+00003d 8129                      	ldd sum_0, Y+1
+00003e 813a                      	ldd sum_1, Y+2
+00003f 814b                      	ldd sum_2, Y+3
+000040 9623                      	adiw y,3
+000041 bfde                      	out SPH, yh
+000042 bfcd                      	out SPL, yl
+000043 91df                      	pop r29
+000044 91cf                      	pop r28
+000045 9508                      	ret
 
 
 RESOURCE USE INFORMATION
@@ -2028,10 +2041,10 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega2560" register use summary:
-x  :   4 y  :   8 z  :   0 r0 :   4 r1 :   3 r2 :   0 r3 :   0 r4 :   0 
-r5 :   0 r6 :   0 r7 :   0 r8 :   6 r9 :   0 r10:   0 r11:   3 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   3 r17:   3 r18:   7 r19:   8 r20:   7 
-r21:  12 r22:   0 r23:   0 r24:   4 r25:   5 r26:   1 r27:   1 r28:   7 
+x  :   2 y  :   8 z  :   0 r0 :   4 r1 :   3 r2 :   0 r3 :   0 r4 :   0 
+r5 :   0 r6 :   0 r7 :   0 r8 :   5 r9 :   0 r10:   0 r11:   3 r12:   0 
+r13:   0 r14:   0 r15:   0 r16:   3 r17:   3 r18:   8 r19:  10 r20:   7 
+r21:   6 r22:   0 r23:   0 r24:   5 r25:   5 r26:   1 r27:   1 r28:   7 
 r29:   7 r30:   0 r31:   0 
 Registers used: 18 out of 35 (51.4%)
 
@@ -2039,29 +2052,29 @@ Registers used: 18 out of 35 (51.4%)
 .lds  :   0 .sts  :   0 adc   :   2 add   :   3 adiw  :   1 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   2 brtc  :   0 brts  :   0 brvc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
+brne  :   0 brpl  :   0 brsh  :   1 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  12 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   1 cpc   :   0 
 cpi   :   1 cpse  :   0 dec   :   0 eicall:   0 eijmp :   0 elpm  :   0 
 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 ijmp  :   0 
-in    :   2 inc   :   2 jmp   :   1 ld    :   2 ldd   :   3 ldi   :   4 
-lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :  10 movw  :   0 
+in    :   2 inc   :   2 jmp   :   1 ld    :   1 ldd   :   3 ldi   :   7 
+lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   8 movw  :   0 
 mul   :   4 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   0 
 ori   :   0 out   :   6 pop   :   2 push  :   2 rcall :   1 ret   :   1 
 reti  :   0 rjmp  :   2 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   1 sbr   :   0 sbrc  :   0 
 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
-st    :   2 std   :   3 sts   :   0 sub   :   0 subi  :   0 swap  :   0 
+st    :   1 std   :   3 sts   :   0 sub   :   0 subi  :   0 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 24 out of 116 (20.7%)
+Instructions used: 25 out of 116 (21.6%)
 
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00008e    142      0    142  262144   0.1%
+[.cseg] 0x000000 0x00008c    140      0    140  262144   0.1%
 [.dseg] 0x000200 0x00020a      0     10     10    8192   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 

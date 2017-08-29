@@ -38,7 +38,7 @@ std Y+4, C ; Y+4 represent B in function
 
 ;-----------main Function-------
 	cpi n,1
-	breq functiondone:
+	breq functiondone
 
 	ldi n, Y+1
 	dec n;

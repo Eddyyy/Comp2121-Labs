@@ -22,14 +22,14 @@
   <FILE>Lab2.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <A><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>32</LINE></A>
-  <initial><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>35</LINE></initial>
-  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>49</LINE></main>
-  <forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>51</LINE></forloop1>
-  <forloop1_done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>73</LINE></forloop1_done>
-  <power><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>79</LINE></power>
-  <end_main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>75</LINE></end_main>
-  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>97</LINE></loop>
-  <loopdone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>108</LINE></loopdone>
+  <A><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>38</LINE></A>
+  <initial><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>41</LINE></initial>
+  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>55</LINE></main>
+  <forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>57</LINE></forloop1>
+  <forloop1_done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>79</LINE></forloop1_done>
+  <power><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>85</LINE></power>
+  <end_main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>81</LINE></end_main>
+  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>115</LINE></loop>
+  <loopdone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>121</LINE></loopdone>
  </LABELS>
 </ASSEMBLER_INFO>

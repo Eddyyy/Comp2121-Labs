@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Mon Aug 28 22:01:15 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Tue Aug 29 18:18:25 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1376,5 +1376,5 @@ CSEG forloop1     0000000c
 CSEG forloop1_done 0000001d
 CSEG power        0000001e
 CSEG end_main     0000001d
-CSEG loop         0000002d
-CSEG loopdone     0000003e
+CSEG loop         00000031
+CSEG loopdone     0000003d

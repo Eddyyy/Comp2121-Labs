@@ -16,14 +16,20 @@
 .def tmp1=r9
 .def tmp2=r10
 
+
+;@0 const to multiply with
+;@1 temp to stored previous
+;@2 value of result
+;@3 resultl
+;@4 resulth
 .macro multiplication ; multiply
-	mov @1 ,@3 ; copy r24 to r18  @1 and @2 is num_before
-	mov @2 ,@4 ; copy r25 to r19
-	mul @0, @1 ; @0 is number
+	mov @1 ,@3 
+	mov @2 ,@4
+	mul @0, @1
 	mov @3, r0 
 	mov @4, r1 
 	mul @0, @2
-	add @4, r0 ; put the result in r24, r25
+	add @4, r0
 
 .endmacro
 
@@ -80,6 +86,7 @@ power:
 ;-----------Prologue------------
 push yl
 push yh
+
 in yl, SPL
 in yh, SPH
 sbiw y, 3
@@ -89,20 +96,26 @@ std Y+1, sum_0
 std Y+2, sum_1
 std Y+3, sum_2
 ;-----------main Function-------
-mov r18, i
-clr r19
-clr r20
-clr r24
-clr r25
+;power is r8 (global i)
+
+;number is r11
+ldi r19, x_const ;store x_const
+mov r11, r19 ; in a empty register
+
+clr r19 ; templ
+clr r20 ; temph
+
+clr r18
+ldi r18,1 ;r18 is function i
+
+clr r24 ; numl
+clr r25 ; numh
+ldi r24,1 ;num = 1
+
 loop:
-	cp r18, i
-	brsh loopdone
-	mov r11,r21
-	ld r21, x
-	multiplication r21, r19, r20, r24, r25
-	st x, r21
-	mov r21,r11
-	clr r11
+	cp i, r18
+	brlo loopdone
+	multiplication r11, r19, r20, r24, r25
 	inc r18
 	jmp loop
 loopdone:
