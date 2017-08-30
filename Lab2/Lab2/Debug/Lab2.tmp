@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc</FILE>
  </INCLUDED_FILES>
@@ -22,14 +22,8 @@
   <FILE>Lab2.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <A><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>38</LINE></A>
-  <initial><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>41</LINE></initial>
-  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>55</LINE></main>
-  <forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>57</LINE></forloop1>
-  <forloop1_done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>79</LINE></forloop1_done>
-  <power><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>85</LINE></power>
-  <end_main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>81</LINE></end_main>
-  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>115</LINE></loop>
-  <loopdone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>121</LINE></loopdone>
+  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>17</LINE></main>
+  <move><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>25</LINE></move>
+  <functiondone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>63</LINE></functiondone>
  </LABELS>
 </ASSEMBLER_INFO>
