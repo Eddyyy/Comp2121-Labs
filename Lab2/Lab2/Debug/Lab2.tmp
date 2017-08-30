@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc</FILE>
  </INCLUDED_FILES>
@@ -22,10 +22,16 @@
   <FILE>Lab2.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>17</LINE></main>
-  <move><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>32</LINE></move>
-  <done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>29</LINE></done>
-  <increment><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>71</LINE></increment>
-  <functionDone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>73</LINE></functionDone>
+  <A><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>38</LINE></A>
+  <initial><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>44</LINE></initial>
+  <n><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>42</LINE></n>
+  <x_c><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>43</LINE></x_c>
+  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>58</LINE></main>
+  <forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>60</LINE></forloop1>
+  <forloop1_done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>84</LINE></forloop1_done>
+  <power><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>90</LINE></power>
+  <end_main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>86</LINE></end_main>
+  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>122</LINE></loop>
+  <loopdone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>128</LINE></loopdone>
  </LABELS>
 </ASSEMBLER_INFO>

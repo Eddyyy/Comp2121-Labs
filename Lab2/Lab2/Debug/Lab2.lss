@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm Wed Aug 30 13:52:25 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Wed Aug 30 14:55:24 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
-C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
-C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
                                  
-                                  .include "m2560def.inc"
+                                 .include "m2560def.inc"
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega2560.xml **********
                                  ;*************************************************************************
@@ -1887,88 +1887,152 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm(1): Including
                                  #endif  /* _M2560DEF_INC_ */
                                  
                                  ; ***** END OF FILE ******************************************************
-                                 /*
-                                  * AsmFile1.asm
-                                  *
-                                  *  Created: 28/08/2017 3:05:27 PM
-                                  *   Author: Edward Thomson, Zhiwei Cao
-                                  */
+                                 ; Lab2.asm
+                                 ;
+                                 ; Created: 23/08/2017 11:31:55 AM
+                                 ; Author : Edward Thomson, Zhiwei Cao
+                                 ;
                                  
-                                 .cseg 
+                                 .equ n_const=10
+                                 .equ x_const=3
+                                 .def i=r8
+                                 .def res_l=r16
+                                 .def res_h=r17
+                                 .def sum_0=r18
+                                 .def sum_1=r19
+                                 .def sum_2=r20
+                                 .def tmp1=r9
+                                 .def tmp2=r10
+                                 
+                                 
+                                 ;@0 const to multiply with
+                                 ;@1 temp to stored previous
+                                 ;@2 value of result
+                                 ;@3 resultl
+                                 ;@4 resulth
+                                 .macro multiplication ; multiply
+                                 	mov @1 ,@3 
+                                 	mov @2 ,@4
+                                 	mul @0, @1
+                                 	mov @3, r0 
+                                 	mov @4, r1 
+                                 	mul @0, @2
+                                 	add @4, r0
+                                 
+                                 .endmacro
+                                 
+                                 .dseg
                                  .org 0x200
-                                 .def counter=r16
-                                 .def n=r17
-                                 .def A=r18
-                                 .def B=r19
-                                 .def C=r20
-                                 .def tmp=r21
+000200                           A: .byte n_const
+                                 
+                                 .cseg
+000000 c002                      rjmp initial
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(42): warning: .cseg .db misalignment - padding zero byte
+000001 000a                      n: .db n_const
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(43): warning: .cseg .db misalignment - padding zero byte
+000002 0003                      x_c: .db x_const
+                                 initial:
+000003 e0a0                      	ldi xl,low(A)
+000004 e0b2                      	ldi xh,high(A)
+000005 efcf                      	ldi yl,low(RAMEND)
+000006 e2d1                      	ldi yh,high(RAMEND)
+000007 bfcd                      	out SPL,yl
+000008 bfde                      	out SPH,yh
+000009 2488                      	clr i
+00000a 2700                      	clr res_l
+00000b 2711                      	clr res_h
+00000c 2722                      	clr sum_0
+00000d 2733                      	clr sum_1
+00000e 2744                      	clr sum_2
+                                 
                                  main:
-000200 e018                      ldi n, 8
-000201 e021                      ldi A, 1
-000202 e033                      ldi B, 3
-000203 e042                      ldi C, 2
-000204 efcf                      ldi yl,low(RAMEND)
-000205 e2d1                      ldi yh,high(RAMEND)
-000206 bfcd                      out SPL,yl
-000207 bfde                      out SPH,yh
-000208 2700                      clr counter
-000209 d001                      rcall move
                                  
-00020a cfff                      done: rjmp done
+                                 forloop1:
+00000f e0e2                      	ldi zl, low(n<<1)
+000010 e0f0                      	ldi zh, high(n<<1)
+000011 9154                      	lpm r21, z
+000012 1558                      	cp r21, i
+000013 f070                      	brlo forloop1_done
+000014 2755                      	clr r21
+                                 	
+000015 928c                      	st x, i
+                                 	;get result from power
+000016 d00c                      	rcall power
+000017 2f08                      	mov res_l, r24
+000018 2f19                      	mov res_h, r25
+                                 	
+000019 915d                      	ld r21, x+
+00001a 9f50                      	mul r21,res_l
+00001b 0d20                      	add sum_0,r0
+00001c 1d31                      	adc sum_1,r1
+00001d 9f51                      	mul r21,res_h
+00001e 0d30                      	add sum_1,r0
+00001f 1d41                      	adc sum_2,r1
+                                 
+000020 9483                      	inc i;
+000021 cfed                      	rjmp forloop1
+                                 forloop1_done:
+                                 
+000022 cfff                      end_main: rjmp end_main
                                  
                                  
-                                 move:
+                                 
+                                 power:
                                  ;-----------Prologue------------
-00020b 93cf                      push yl
-00020c 93df                      push yh
-00020d b7cd                      in yl, SPL
-00020e b7de                      in yh, SPH
-00020f 9724                      sbiw y, 4
-000210 bfcd                      out SPL, yl
-000211 bfde                      out SPH, yh
-000212 8319                      std Y+1, n ; Y+1 store n in Y+1
-000213 832a                      std Y+2, A ; Y+2 represent A in function
-000214 833b                      std Y+3, B ; Y+3 represent C in function
-000215 834c                      std Y+4, C ; Y+4 represent B in function
+000023 93cf                      push yl
+000024 93df                      push yh
                                  
+000025 b7cd                      in yl, SPL
+000026 b7de                      in yh, SPH
+000027 9723                      sbiw y, 3
+000028 bfcd                      out SPL, yl
+000029 bfde                      out SPH, yh
+00002a 8329                      std Y+1, sum_0
+00002b 833a                      std Y+2, sum_1
+00002c 834b                      std Y+3, sum_2
                                  ;-----------main Function-------
-000216 3011                      	cpi n,1
-000217 f091                      	breq increment
+                                 ;power is r8 (global i)
                                  
-000218 8119                      	ldd n, Y+1
-000219 951a                      	dec n;
-00021a 812a                      	ldd A, Y+2 ;A represent first input 
-00021b 813c                      	ldd B, Y+4 ;B represent second input
-00021c 814b                      	ldd C, Y+3 ;C represent third input 
-00021d dfed                      	rcall move
+                                 ;number is r11
+00002d e0e4                      ldi zl, low(x_c<<1)
+00002e e0f0                      ldi zh, high(x_c<<1)
+00002f 9134                      lpm r19, z ;store x_const
+000030 2eb3                      mov r11, r19 ; in a empty register
                                  
-00021e e011                      	ldi n, 1
-00021f 812a                      	ldd A, Y+2
-000220 813b                      	ldd B, Y+3
-000221 814c                      	ldd C, Y+4	
-000222 dfe8                      	rcall move
+000031 2733                      clr r19 ; templ
+000032 2744                      clr r20 ; temph
                                  
-000223 8119                      	ldd n, Y+1
-000224 951a                      	dec n;
-000225 812c                      	ldd A, Y+4
-000226 813b                      	ldd B, Y+3
-000227 814a                      	ldd C, Y+2
-000228 dfe2                      	rcall move
+000033 2722                      clr r18
+000034 e021                      ldi r18,1 ;r18 is function i
                                  
-000229 c001                      	rjmp functionDone
-                                 increment:
-00022a 9503                      	inc counter;
-                                 functiondone:
+000035 2788                      clr r24 ; numl
+000036 2799                      clr r25 ; numh
+000037 e081                      ldi r24,1 ;num = 1
+                                 
+                                 loop:
+000038 1682                      	cp i, r18
+000039 f050                      	brlo loopdone
+00003a 2f38
+00003b 2f49
+00003c 9eb3
+00003d 2d80
+00003e 2d91
+00003f 9eb4
+000040 0d90                      	multiplication r11, r19, r20, r24, r25
+000041 9523                      	inc r18
+000042 940c 0038                 	jmp loop
+                                 loopdone:
+                                 
                                  ;-----------Epilogue------------
-00022b 8119                      	ldd n, Y+1
-00022c 812a                      	ldd A, Y+2
-00022d 813b                      	ldd B, Y+3
-00022e 814c                      	ldd C, Y+4
-00022f 9624                      	adiw y,4
-000230 bfde                      	out SPH, yh
-000231 bfcd                      	out SPL, yl
-000232 91df                      	pop yh
-000233 91cf                      	pop yl
+000044 8129                      	ldd sum_0, Y+1
+000045 813a                      	ldd sum_1, Y+2
+000046 814b                      	ldd sum_2, Y+3
+000047 9623                      	adiw y,3
+000048 bfde                      	out SPH, yh
+000049 bfcd                      	out SPL, yl
+00004a 91df                      	pop yh
+00004b 91cf                      	pop yl
+00004c 9508                      	ret
 
 
 RESOURCE USE INFORMATION
@@ -1986,41 +2050,41 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega2560" register use summary:
-x  :   0 y  :  21 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
-r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   2 r17:   9 r18:   6 r19:   6 r20:   6 
-r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   7 
-r29:   7 r30:   0 r31:   0 
-Registers used: 8 out of 35 (22.9%)
+x  :   2 y  :   8 z  :   2 r0 :   4 r1 :   3 r2 :   0 r3 :   0 r4 :   0 
+r5 :   0 r6 :   0 r7 :   0 r8 :   5 r9 :   0 r10:   0 r11:   3 r12:   0 
+r13:   0 r14:   0 r15:   0 r16:   3 r17:   3 r18:   8 r19:  10 r20:   7 
+r21:   6 r22:   0 r23:   0 r24:   5 r25:   5 r26:   1 r27:   1 r28:   7 
+r29:   7 r30:   2 r31:   2 
+Registers used: 21 out of 35 (60.0%)
 
 "ATmega2560" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   1 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   2 add   :   3 adiw  :   1 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   1 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   1 cpse  :   0 dec   :   2 eicall:   0 eijmp :   0 elpm  :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  12 cls   :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
+cpi   :   0 cpse  :   0 dec   :   0 eicall:   0 eijmp :   0 elpm  :   0 
 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 ijmp  :   0 
-in    :   2 inc   :   1 jmp   :   0 ld    :   0 ldd   :  15 ldi   :   7 
-lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 
-mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   0 
-ori   :   0 out   :   6 pop   :   2 push  :   2 rcall :   4 ret   :   1 
-reti  :   0 rjmp  :   2 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
+in    :   2 inc   :   2 jmp   :   1 ld    :   1 ldd   :   3 ldi   :  10 
+lds   :   0 lpm   :   4 lsl   :   0 lsr   :   0 mov   :   7 movw  :   0 
+mul   :   4 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   0 
+ori   :   0 out   :   6 pop   :   2 push  :   2 rcall :   1 ret   :   1 
+reti  :   0 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   1 sbr   :   0 sbrc  :   0 
 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
-st    :   0 std   :   4 sts   :   0 sub   :   0 subi  :   0 swap  :   0 
+st    :   1 std   :   3 sts   :   0 sub   :   0 subi  :   0 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 17 out of 116 (14.7%)
+Instructions used: 24 out of 116 (20.7%)
 
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000400 0x00046a    106      0    106  262144   0.0%
-[.dseg] 0x000200 0x000200      0      0      0    8192   0.0%
+[.cseg] 0x000000 0x00009a    150      4    154  262144   0.1%
+[.dseg] 0x000200 0x00020a      0     10     10    8192   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 
-Assembly complete, 0 errors, 0 warnings
+Assembly complete, 0 errors, 2 warnings

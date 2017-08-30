@@ -5,7 +5,7 @@
 ; Author : Edward Thomson, Zhiwei Cao
 ;
 
-.equ n=10
+.equ n_const=10
 .equ x_const=3
 .def i=r8
 .def res_l=r16
@@ -35,9 +35,12 @@
 
 .dseg
 .org 0x200
-A: .byte n
+A: .byte n_const
 
 .cseg
+rjmp initial
+n: .db n_const
+x_c: .db x_const
 initial:
 	ldi xl,low(A)
 	ldi xh,high(A)
@@ -55,7 +58,9 @@ initial:
 main:
 
 forloop1:
-	ldi r21, n
+	ldi zl, low(n<<1)
+	ldi zh, high(n<<1)
+	lpm r21, z
 	cp r21, i
 	brlo forloop1_done
 	clr r21
@@ -99,7 +104,9 @@ std Y+3, sum_2
 ;power is r8 (global i)
 
 ;number is r11
-ldi r19, x_const ;store x_const
+ldi zl, low(x_c<<1)
+ldi zh, high(x_c<<1)
+lpm r19, z ;store x_const
 mov r11, r19 ; in a empty register
 
 clr r19 ; templ
