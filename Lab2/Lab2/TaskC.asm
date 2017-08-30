@@ -19,18 +19,25 @@ ldi n, 8
 ldi A, 1
 ldi B, 3
 ldi C, 2
+ldi yl,low(RAMEND)
+ldi yh,high(RAMEND)
+out SPL,yl
+out SPH,yh
 clr counter
+rcall move
+
+done: rjmp done
 
 
 move:
 ;-----------Prologue------------
-push r28
-push r29
-in r28, SPL
-in r29, SPH
-sbiw r28, 4
-out SPL, r28
-out SPH, r29
+push yl
+push yh
+in yl, SPL
+in yh, SPH
+sbiw y, 4
+out SPL, yl
+out SPH, yh
 std Y+1, n ; Y+1 store n in Y+1
 std Y+2, A ; Y+2 represent A in function
 std Y+3, B ; Y+3 represent C in function
@@ -38,9 +45,9 @@ std Y+4, C ; Y+4 represent B in function
 
 ;-----------main Function-------
 	cpi n,1
-	breq functiondone
+	breq increment
 
-	ldi n, Y+1
+	ldd n, Y+1
 	dec n;
 	ldd A, Y+2 ;A represent first input 
 	ldd B, Y+4 ;B represent second input
@@ -53,23 +60,25 @@ std Y+4, C ; Y+4 represent B in function
 	ldd C, Y+4	
 	rcall move
 
-	ldi n, Y+1
+	ldd n, Y+1
 	dec n;
 	ldd A, Y+4
 	ldd B, Y+3
 	ldd C, Y+2
 	rcall move
 
+	rjmp functionDone
+increment:
+	inc counter;
 functiondone:
-inc counter;
 ;-----------Epilogue------------
-	ldd n,  Y+1
+	ldd n, Y+1
 	ldd A, Y+2
 	ldd B, Y+3
 	ldd C, Y+4
-	adiw r28,4
-	out SPH, r29
-	out SPL, r28
-	pop r29
-	pop r28
+	adiw y,4
+	out SPH, yh
+	out SPL, yl
+	pop yh
+	pop yl
 	ret

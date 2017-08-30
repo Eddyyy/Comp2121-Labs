@@ -23,7 +23,9 @@
  </OUTPUT_FILES>
  <LABELS>
   <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>17</LINE></main>
-  <move><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>25</LINE></move>
-  <functiondone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>63</LINE></functiondone>
+  <move><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>32</LINE></move>
+  <done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>29</LINE></done>
+  <increment><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>71</LINE></increment>
+  <functionDone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskC.asm</FILE><LINE>73</LINE></functionDone>
  </LABELS>
 </ASSEMBLER_INFO>
