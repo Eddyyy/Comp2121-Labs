@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Tue Aug 29 18:18:25 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm Wed Aug 30 10:03:49 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
@@ -1943,9 +1943,9 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including
                                  main:
                                  
                                  forloop1:
-00000c 2d58                      	mov r21, i
-00000d 305a                      	cpi r21, n
-00000e f470                      	brsh forloop1_done
+00000c e05a                      	ldi r21, n
+00000d 1558                      	cp r21, i
+00000e f070                      	brlo forloop1_done
 00000f 2755                      	clr r21
                                  	
 000010 928c                      	st x, i
@@ -2021,8 +2021,8 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm(1): Including
 000040 9623                      	adiw y,3
 000041 bfde                      	out SPH, yh
 000042 bfcd                      	out SPL, yl
-000043 91df                      	pop r29
-000044 91cf                      	pop r28
+000043 91df                      	pop yh
+000044 91cf                      	pop yl
 000045 9508                      	ret
 
 
@@ -2052,15 +2052,15 @@ Registers used: 18 out of 35 (51.4%)
 .lds  :   0 .sts  :   0 adc   :   2 add   :   3 adiw  :   1 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   1 brtc  :   0 brts  :   0 brvc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 
+brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :  12 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   1 cpc   :   0 
-cpi   :   1 cpse  :   0 dec   :   0 eicall:   0 eijmp :   0 elpm  :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 
+cpi   :   0 cpse  :   0 dec   :   0 eicall:   0 eijmp :   0 elpm  :   0 
 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 ijmp  :   0 
-in    :   2 inc   :   2 jmp   :   1 ld    :   1 ldd   :   3 ldi   :   7 
-lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   8 movw  :   0 
+in    :   2 inc   :   2 jmp   :   1 ld    :   1 ldd   :   3 ldi   :   8 
+lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   7 movw  :   0 
 mul   :   4 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   0 
 ori   :   0 out   :   6 pop   :   2 push  :   2 rcall :   1 ret   :   1 
 reti  :   0 rjmp  :   2 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
@@ -2069,7 +2069,7 @@ sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 ser   :   0
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
 st    :   1 std   :   3 sts   :   0 sub   :   0 subi  :   0 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 25 out of 116 (21.6%)
+Instructions used: 23 out of 116 (19.8%)
 
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%

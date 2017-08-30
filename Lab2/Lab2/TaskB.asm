@@ -55,9 +55,9 @@ initial:
 main:
 
 forloop1:
-	mov r21, i
-	cpi r21, n
-	brsh forloop1_done
+	ldi r21, n
+	cp r21, i
+	brlo forloop1_done
 	clr r21
 	
 	st x, i
@@ -127,6 +127,6 @@ loopdone:
 	adiw y,3
 	out SPH, yh
 	out SPL, yl
-	pop r29
-	pop r28
+	pop yh
+	pop yl
 	ret
