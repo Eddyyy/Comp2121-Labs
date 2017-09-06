@@ -5,16 +5,16 @@
 ; Author : Edward Thomson, Zhiwei Cao
 ;
 
-.equ n_const=10
-.equ x_const=3
-.def i=r8
-.def res_l=r16
-.def res_h=r17
-.def sum_0=r18
-.def sum_1=r19
-.def sum_2=r20
-.def tmp1=r9
-.def tmp2=r10
+.equ n_const=10 ;global
+.equ x_const=3 ;global
+.def i=r8 ;main
+.def res_l=r16 ;main
+.def res_h=r17 ;main
+.def sum_0=r18 ;main
+.def sum_1=r19 ;main
+.def sum_2=r20 ;main
+.def tmp1=r9 ;main
+.def tmp2=r10 ;main
 
 
 ;@0 const to multiply with
@@ -67,7 +67,22 @@ forloop1:
 	
 	st x, i
 	;get result from power
+	in yl, SPL
+	in yh, SPH
+	sbiw Y, 17
+
+	ldi zl, low(x_c<<1)
+	ldi zh, high(x_c<<1)
+	lpm r22, z ;store x_const
+	std Y+1, r22 ;pass number to the function
+
+	std Y+2, i ;pass powerto the function
+
 	rcall power
+
+	ldd r24, Y+4
+	ldd r25, Y+3
+
 	mov res_l, r24
 	mov res_h, r25
 	
@@ -89,51 +104,76 @@ end_main: rjmp end_main
 
 power:
 ;-----------Prologue------------
-push yl
-push yh
+	push YL
+	push YH
+	push i
+	push res_l
+	push res_h
+	push sum_0
+	push sum_1
+	push sum_2
+	push tmp1
+	push tmp2
 
-in yl, SPL
-in yh, SPH
-sbiw y, 3
-out SPL, yl
-out SPH, yh
-std Y+1, sum_0
-std Y+2, sum_1
-std Y+3, sum_2
+	in yl, SPL
+	in yh, SPH
+	sbiw y, 9
+	out SPL, yl
+	out SPH, yh
+
+	;initialize variables
+
+	clr r19 ; templ
+	std Y+3, r19 ;initialize temp to 0
+	clr r20 ; temph
+	std Y+2, r20 ;^^
+
+	clr r18
+	ldi r18,1 ;r18 is function i
+	std Y+1, r18 ;initialize funtion i to 1
+
+	clr r24 ; numl
+	clr r25 ; numh
+	ldi r24,1 ;num = 1
+	std Y+5, r24 ;initialize num to 1
+	std Y+4, r25
+
 ;-----------main Function-------
-;power is r8 (global i)
+	ldd r19, Y+3 ;templ
+	ldd r20, Y+2 ;temph
+	ldd r18, Y+1 ;i
+	ldd r24, Y+5 ;numl
+	ldd r25, Y+4 ;numh
+	ldd r16, Y+6 ;number
+	ldd r17, Y+7 ;power
 
-;number is r11
-ldi zl, low(x_c<<1)
-ldi zh, high(x_c<<1)
-lpm r19, z ;store x_const
-mov r11, r19 ; in a empty register
+	loop:
+		cp r17, r18
+		brlo loopdone
+		multiplication r16, r19, r20, r24, r25
+		inc r18
+		jmp loop
+	loopdone:
 
-clr r19 ; templ
-clr r20 ; temph
-
-clr r18
-ldi r18,1 ;r18 is function i
-
-clr r24 ; numl
-clr r25 ; numh
-ldi r24,1 ;num = 1
-
-loop:
-	cp i, r18
-	brlo loopdone
-	multiplication r11, r19, r20, r24, r25
-	inc r18
-	jmp loop
-loopdone:
+	std Y+9, r24
+	std Y+8, r25
 
 ;-----------Epilogue------------
-	ldd sum_0, Y+1
-	ldd sum_1, Y+2
-	ldd sum_2, Y+3
-	adiw y,3
+	in yl, SPL
+	in yh, SPH
+	adiw y, 9
 	out SPH, yh
 	out SPL, yl
-	pop yh
-	pop yl
+
+	pop tmp2
+	pop tmp1
+	pop sum_2
+	pop sum_1
+	pop sum_0
+	pop res_h
+	pop res_l
+	pop i
+	pop YH
+	pop YL
+	
 	ret

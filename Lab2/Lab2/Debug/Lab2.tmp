@@ -28,10 +28,10 @@
   <x_c><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>43</LINE></x_c>
   <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>58</LINE></main>
   <forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>60</LINE></forloop1>
-  <forloop1_done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>84</LINE></forloop1_done>
-  <power><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>90</LINE></power>
-  <end_main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>86</LINE></end_main>
-  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>122</LINE></loop>
-  <loopdone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>128</LINE></loopdone>
+  <forloop1_done><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>99</LINE></forloop1_done>
+  <power><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>105</LINE></power>
+  <end_main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>101</LINE></end_main>
+  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>150</LINE></loop>
+  <loopdone><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab2\Lab2\TaskB.asm</FILE><LINE>156</LINE></loopdone>
  </LABELS>
 </ASSEMBLER_INFO>
