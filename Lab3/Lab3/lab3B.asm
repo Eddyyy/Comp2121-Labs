@@ -27,7 +27,7 @@ out PORTC, temp			;activate
 out DDRD, temp
 out PORTD, temp
 ldi temp, (2 << ISC10) | (2 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
-sts EICRA, temp
+sts EICRA, temp ; 
 in temp, EIMSK	;enable INT0
 ori temp, (1<<INT0) | (1<<INT1)
 out EIMSK, temp
@@ -36,9 +36,12 @@ sei ;enable Global Interrupt
 jmp main
 
 EXT_INT0:
+;-------------prologue-------------
 push temp
 in temp, SREG
 push temp
+
+;-------------main-------------
 loop:
 	inc debounce
 	loopa:
@@ -55,6 +58,8 @@ dec pattern
 rjmp epilogue
 equal:
 	ldi pattern, 15	
+
+;--------epilogue-----------
 epilogue:
 mov temp, pattern
 out PORTC, temp
@@ -64,9 +69,12 @@ pop temp
 reti
 
 EXT_INT1:
+;-------------prologue-------------
 push temp
 in temp, SREG
 push temp
+
+;-------------main-------------
 loop2:
 	inc debounce
 	loopb:	;255*255/16MHz
@@ -77,6 +85,7 @@ loop2:
 	cpi debounce, 255
 	brlo loop2
 clr debounce
+
 cpi pattern, 15
 breq equal2
 inc pattern
@@ -84,6 +93,7 @@ rjmp epilogue2
 equal2:
 	ldi pattern, 0
 
+;--------epilogue-----------
 epilogue2:
 mov temp, pattern
 out PORTC, temp
