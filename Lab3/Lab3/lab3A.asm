@@ -2,8 +2,7 @@
 .def temp = r16
 .def debounce = r17
 .def de2 = r18
-.def de3 = r19
-.def de4 = r20
+
 .equ origin = 0x0F
 
 .cseg
@@ -26,20 +25,10 @@ loop:
 	inc debounce
 	loopa:
 		inc de2
-			loopi:
-				inc de3
-						loopc:
-						inc de4
-						cpi de4, 255
-						brlo loopc
-						clr de4
-				cpi de3, 15
-				brlo loopi
-				clr de3
-		cpi de2, 15
+		cpi de2, 255
 		brlo loopa
 		clr de2
-	cpi debounce, 15	
+	cpi debounce, 255
 	brlo loop
 clr debounce
 dec temp
@@ -53,25 +42,14 @@ switch1:
 sbic PIND, 1 ; Skip the next instruction if PB1 is pushed
 rjmp switch0 ; If not pushed, check the other switch
 
-
 loop2:
 	inc debounce
-	loopb:	;255*15*15*15*1/16MHz
+	loopb:	;255*255/16MHz
 		inc de2
-			loopii:
-				inc de3
-						loopd:
-						inc de4
-						cpi de4, 255
-						brlo loopd
-						clr de4
-				cpi de3, 15
-				brlo loopii
-				clr de3
-		cpi de2, 15
+		cpi de2, 255
 		brlo loopb
 		clr de2
-	cpi debounce, 15	
+	cpi debounce, 255
 	brlo loop2
 clr debounce
 

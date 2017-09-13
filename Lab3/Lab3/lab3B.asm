@@ -8,7 +8,7 @@
 .cseg
 .org 0x0
 jmp RESET
-.org INT0addr ; INT0addr is the address of EXT_INT0
+.org INT0addr ; Jump to the interrupt handler, INT0addr is the address of EXT_INT0
 jmp EXT_INT0
 .org INT1addr ; INT1addr is the address of EXT_INT1
 jmp EXT_INT1
@@ -26,12 +26,12 @@ clr temp
 out PORTC, temp			;activate
 out DDRD, temp
 out PORTD, temp
-ldi temp, (2 << ISC10) | (2 << ISC00)
+ldi temp, (2 << ISC10) | (2 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
 sts EICRA, temp
-in temp, EIMSK
+in temp, EIMSK	;enable INT0
 ori temp, (1<<INT0) | (1<<INT1)
 out EIMSK, temp
-sei
+sei ;enable Global Interrupt
 
 jmp main
 
@@ -43,24 +43,12 @@ loop:
 	inc debounce
 	loopa:
 		inc de2
-			loopi:
-				inc de3
-					loopc:
-						inc de4
-						cpi de4, 15
-						brlo loopc
-						clr de4
-				cpi de3, 15
-				brlo loopi
-				clr de3
-		cpi de2, 15
+		cpi de2, 255
 		brlo loopa
 		clr de2
-	cpi debounce, 15
+	cpi debounce, 255
 	brlo loop
 clr debounce
-clr de2
-clr de3
 cpi pattern, 0
 breq equal
 dec pattern
@@ -81,26 +69,14 @@ in temp, SREG
 push temp
 loop2:
 	inc debounce
-	loopb:
+	loopb:	;255*255/16MHz
 		inc de2
-			loopii:
-				inc de3
-						loopd:
-						inc de4
-						cpi de4, 15
-						brlo loopd
-						clr de4
-				cpi de3, 15
-				brlo loopii
-				clr de3
-		cpi de2, 15
+		cpi de2, 255
 		brlo loopb
 		clr de2
-	cpi debounce, 15	
+	cpi debounce, 255
 	brlo loop2
 clr debounce
-clr de2
-clr de3
 cpi pattern, 15
 breq equal2
 inc pattern
