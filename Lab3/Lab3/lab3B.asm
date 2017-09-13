@@ -26,7 +26,7 @@ clr temp
 out PORTC, temp			;activate
 out DDRD, temp
 out PORTD, temp
-ldi temp, (2 << ISC10) | (2 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
+ldi temp, (1 << ISC10) | (1 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
 sts EICRA, temp ; 
 in temp, EIMSK	;enable INT0
 ori temp, (1<<INT0) | (1<<INT1)
