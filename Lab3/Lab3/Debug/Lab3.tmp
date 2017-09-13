@@ -22,18 +22,18 @@
   <FILE>Lab3.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <RESET><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>16</LINE></RESET>
-  <EXT_INT0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>38</LINE></EXT_INT0>
-  <EXT_INT1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>71</LINE></EXT_INT1>
-  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>105</LINE></main>
-  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>45</LINE></loop>
-  <loopa><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>47</LINE></loopa>
-  <equal><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>59</LINE></equal>
-  <epilogue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>63</LINE></epilogue>
-  <loop2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>78</LINE></loop2>
-  <loopb><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>80</LINE></loopb>
-  <equal2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>93</LINE></equal2>
-  <epilogue2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>97</LINE></epilogue2>
-  <keepgoing><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>107</LINE></keepgoing>
+  <RESET><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>15</LINE></RESET>
+  <EXT_INT0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>37</LINE></EXT_INT0>
+  <EXT_INT1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>70</LINE></EXT_INT1>
+  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>103</LINE></main>
+  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>44</LINE></loop>
+  <loopa><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>46</LINE></loopa>
+  <equal><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>58</LINE></equal>
+  <epilogue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>62</LINE></epilogue>
+  <loop2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>77</LINE></loop2>
+  <loopb><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>79</LINE></loopb>
+  <equal2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>91</LINE></equal2>
+  <epilogue2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>95</LINE></epilogue2>
+  <keepgoing><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>105</LINE></keepgoing>
  </LABELS>
 </ASSEMBLER_INFO>

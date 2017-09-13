@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 13 14:15:04 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 13 15:25:31 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
@@ -1891,8 +1891,7 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
                                  .def pattern =r17
                                  .def debounce = r18
                                  .def de2 = r19
-                                 .def de3 = r20
-                                 .def de4 = r21
+                                 
                                  .cseg
                                  .org 0x0
 000000 940c 0006                 jmp RESET
@@ -1914,7 +1913,7 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 00000e b908                      out PORTC, temp			;activate
 00000f b90a                      out DDRD, temp
 000010 b90b                      out PORTD, temp
-000011 e00a                      ldi temp, (2 << ISC10) | (2 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
+000011 e005                      ldi temp, (1 << ISC10) | (1 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
 000012 9300 0069                 sts EICRA, temp ; 
 000014 b30d                      in temp, EIMSK	;enable INT0
 000015 6003                      ori temp, (1<<INT0) | (1<<INT1)
@@ -1945,7 +1944,7 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 000027 951a                      dec pattern
 000028 c001                      rjmp epilogue
                                  equal:
-000029 e01f                      	ldi pattern, 15	
+000029 e01f                      	ldi pattern, 15
                                  
                                  ;--------epilogue-----------
                                  epilogue:
@@ -1973,7 +1972,6 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 000038 3f2f                      	cpi debounce, 255
 000039 f3c8                      	brlo loop2
 00003a 2722                      clr debounce
-                                 
 00003b 301f                      cpi pattern, 15
 00003c f011                      breq equal2
 00003d 9513                      inc pattern
