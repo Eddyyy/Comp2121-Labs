@@ -2,7 +2,7 @@
 .def temp = r16
 .def debounce = r17
 .def de2 = r18
-
+.def temp1 = r19
 .equ origin = 0x0F
 
 .cseg
@@ -21,6 +21,13 @@ out PORTC, temp
 switch0:
 sbic PIND, 0 ; Skip the next instruction if PB0 is pushed
 rjmp switch1 ; If not pushed, check the other switch
+
+;wait:
+;in temp1, PIND
+;andi temp1, (1<<0)
+;cpi temp1, (1<<0)
+;breq wait
+
 loop:
 	inc debounce
 	loopa:
@@ -31,6 +38,7 @@ loop:
 	cpi debounce, 255
 	brlo loop
 clr debounce
+
 dec temp
 rjmp epilogue
 equal:
@@ -41,6 +49,13 @@ out PORTC, temp
 switch1:
 sbic PIND, 1 ; Skip the next instruction if PB1 is pushed
 rjmp switch0 ; If not pushed, check the other switch
+
+;wait2:
+;in temp1, PIND
+;andi temp1, (1<<1)
+;cpi temp1, (1<<1)
+;breq wait2
+
 
 loop2:
 	inc debounce

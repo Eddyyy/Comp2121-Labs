@@ -3,8 +3,7 @@
 .def pattern =r17
 .def debounce = r18
 .def de2 = r19
-.def de3 = r20
-.def de4 = r21
+
 .cseg
 .org 0x0
 jmp RESET
@@ -57,7 +56,7 @@ breq equal
 dec pattern
 rjmp epilogue
 equal:
-	ldi pattern, 15	
+	ldi pattern, 15
 
 ;--------epilogue-----------
 epilogue:
@@ -85,7 +84,6 @@ loop2:
 	cpi debounce, 255
 	brlo loop2
 clr debounce
-
 cpi pattern, 15
 breq equal2
 inc pattern
