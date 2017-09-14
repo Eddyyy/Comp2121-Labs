@@ -6,8 +6,8 @@
 
 .cseg
 .org 0x0
-ldi flag0, 0
-ldi flag1, 0
+clr flag0
+clr flag1
 
 ldi temp, origin
 out PORTC, temp 			; Write ones to all the LEDs
