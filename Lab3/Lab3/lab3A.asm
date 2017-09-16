@@ -22,7 +22,9 @@ out PORTC, temp
 
 ;-----------------------------------------
 switch0:
-cpi PIND0, 0 				; I'm not sure, But I thinks that PIND0 indicate that the value on bit0 of PIND.
+in r19, PIND
+andi  r19, (1<<0)
+cpi r19, 0				; I'm not sure, But I thinks that PIND0 indicate that the value on bit0 of PIND.
 breq instruction0			; If not pushed, check the other switch
 clr flag0
 rjmp switch1
@@ -42,7 +44,9 @@ out PORTC, temp
 
 ;------------------------------------------
 switch1:
-cpi PIND1, 0
+in r19, PIND
+andi  r19, (1<<1)
+cpi r19, 0
 breq instruction1			; If not pushed, check the other switch
 clr flag1
 rjmp switch0
