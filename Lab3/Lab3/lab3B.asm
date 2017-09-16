@@ -3,6 +3,7 @@
 .def pattern =r17
 .def debounce = r18
 .def de2 = r19
+.equ origin = 0x0F
 
 .cseg
 .org 0x0
@@ -13,16 +14,16 @@ jmp EXT_INT0
 jmp EXT_INT1
 
 RESET:
-ldi pattern, 15
+ldi temp, origin
 ldi temp, low(RAMEND)
 out SPL, temp
 ldi temp, high(RAMEND)
 out SPH, temp
 
-ser temp
-out DDRC, temp
+ldi temp, origin
+out PORTC, temp 			; Write ones to all the LEDs
+out DDRC, temp 
 clr temp
-out PORTC, temp			;activate
 out DDRD, temp
 out PORTD, temp
 ldi temp, (1 << ISC10) | (1 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
@@ -45,6 +46,7 @@ loop:
 	inc debounce
 	loopa:
 		inc de2
+		nop ;wait
 		cpi de2, 255
 		brlo loopa
 		clr de2
@@ -56,7 +58,7 @@ breq equal
 dec pattern
 rjmp epilogue
 equal:
-	ldi pattern, 15
+	ldi pattern, origin
 
 ;--------epilogue-----------
 epilogue:
@@ -78,13 +80,15 @@ loop2:
 	inc debounce
 	loopb:	;255*255/16MHz
 		inc de2
+		nop ; wait
 		cpi de2, 255
 		brlo loopb
 		clr de2
 	cpi debounce, 255
 	brlo loop2
 clr debounce
-cpi pattern, 15
+
+cpi pattern, origin
 breq equal2
 inc pattern
 rjmp epilogue2
@@ -104,4 +108,5 @@ main: ; main - does nothing but increment a counter
 clr temp
 keepgoing:
 inc temp
+nop
 rjmp keepgoing

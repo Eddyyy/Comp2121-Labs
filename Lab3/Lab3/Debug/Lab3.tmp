@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc</FILE>
  </INCLUDED_FILES>
@@ -22,12 +22,18 @@
   <FILE>Lab3.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <switch0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>24</LINE></switch0>
-  <instruction0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>32</LINE></instruction0>
-  <switch1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>46</LINE></switch1>
-  <epilogue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>42</LINE></epilogue>
-  <equal><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>40</LINE></equal>
-  <instruction1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>55</LINE></instruction1>
-  <equal2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>66</LINE></equal2>
+  <RESET><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>16</LINE></RESET>
+  <EXT_INT0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>38</LINE></EXT_INT0>
+  <EXT_INT1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>72</LINE></EXT_INT1>
+  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>107</LINE></main>
+  <loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>45</LINE></loop>
+  <loopa><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>47</LINE></loopa>
+  <equal><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>60</LINE></equal>
+  <epilogue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>64</LINE></epilogue>
+  <loop2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>79</LINE></loop2>
+  <loopb><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>81</LINE></loopb>
+  <equal2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>95</LINE></equal2>
+  <epilogue2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>99</LINE></epilogue2>
+  <keepgoing><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm</FILE><LINE>110</LINE></keepgoing>
  </LABELS>
 </ASSEMBLER_INFO>

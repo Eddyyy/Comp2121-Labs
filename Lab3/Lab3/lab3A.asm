@@ -22,8 +22,8 @@ out PORTC, temp
 
 ;-----------------------------------------
 switch0:
-in r19, PIND
-andi  r19, (1<<0)
+in r19, PIND			; need to store the value of PIND into a register
+andi  r19, (1<<0)		; then compare that register with (not pushed)
 cpi r19, 0				; I'm not sure, But I thinks that PIND0 indicate that the value on bit0 of PIND.
 breq instruction0			; If not pushed, check the other switch
 clr flag0
@@ -34,7 +34,8 @@ cpi flag0, 1
 breq switch1
 
 ldi flag0, 1
-
+cpi temp, origin
+breq equal
 dec temp
 rjmp epilogue
 equal:
@@ -58,7 +59,7 @@ breq switch0
 
 ldi flag1, 1
 
-cpi temp, 15
+cpi temp, origin
 breq equal2
 inc temp
 out PORTC, temp
