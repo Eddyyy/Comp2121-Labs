@@ -26,7 +26,7 @@ out DDRC, temp
 clr temp
 out DDRD, temp
 out PORTD, temp
-ldi temp, (1 << ISC10) | (1 << ISC00)	;set INT0, 1 as falling-edge triggered interrupt
+ldi temp, (1 << ISC11) | (1 << ISC01)	;set INT0, 1 as falling-edge triggered interrupt
 sts EICRA, temp ; 
 in temp, EIMSK	;enable INT0
 ori temp, (1<<INT0) | (1<<INT1)
@@ -53,6 +53,7 @@ loop:
 	cpi debounce, 255
 	brlo loop
 clr debounce
+
 cpi pattern, 0
 breq equal
 dec pattern
@@ -74,6 +75,9 @@ EXT_INT1:
 push temp
 in temp, SREG
 push temp
+push pattern
+st yl, SPL
+st yh, SPH
 
 ;-------------main-------------
 loop2:
@@ -88,6 +92,7 @@ loop2:
 	brlo loop2
 clr debounce
 
+std
 cpi pattern, origin
 breq equal2
 inc pattern
@@ -98,6 +103,7 @@ equal2:
 ;--------epilogue-----------
 epilogue2:
 mov temp, pattern
+pop pattern
 out PORTC, temp
 pop temp
 out SREG, temp

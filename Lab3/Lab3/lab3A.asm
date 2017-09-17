@@ -17,15 +17,16 @@ out PORTD, temp 			; Enable pull-up resistors on PORTF
 clr temp
 out DDRD, temp 				; PORTF is all inputs
 
-ldi temp, 15				;15 = 0b00001111
+ldi temp, origin				;15 = 0b00001111 = 0x0F
 out PORTC, temp
-
+nop
+nop
 ;-----------------------------------------
 switch0:
 in r19, PIND			; need to store the value of PIND into a register
 andi  r19, (1<<0)		; then compare that register with (not pushed)
-cpi r19, 0				; I'm not sure, But I thinks that PIND0 indicate that the value on bit0 of PIND.
-breq instruction0			; If not pushed, check the other switch
+cpi r19, (1<<0)
+brne instruction1			; If not pushed, check the other switch flag
 clr flag0
 rjmp switch1
 
@@ -34,21 +35,21 @@ cpi flag0, 1
 breq switch1
 
 ldi flag0, 1
-cpi temp, origin
-breq equal
+cpi temp, 0
+breq equal0
 dec temp
-rjmp epilogue
-equal:
-	ldi temp, 15
-epilogue:
-out PORTC, temp
+rjmp epilogue0
+equal0:
+	ldi temp, origin
+epilogue0:
+	out PORTC, temp
 
 ;------------------------------------------
 switch1:
 in r19, PIND
 andi  r19, (1<<1)
-cpi r19, 0
-breq instruction1			; If not pushed, check the other switch
+cpi r19, (1<<1)
+brne instruction0			; If not pushed, check the other switch flag
 clr flag1
 rjmp switch0
 
@@ -58,14 +59,13 @@ cpi flag1, 1
 breq switch0
 
 ldi flag1, 1
-
 cpi temp, origin
 breq equal2
 inc temp
-out PORTC, temp
-rjmp switch0
+rjmp epilogue2
 equal2:
 	ldi temp, 0
+epilogue2:
 	out PORTC, temp
 	rjmp switch0 			; Now check PB0 again
 

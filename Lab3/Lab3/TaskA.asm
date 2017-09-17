@@ -13,10 +13,7 @@
 .equ PATTERN3 = 0x1F
 
 .cseg
-INT0_exit:			;pb0
 
-sbi
-INT1_exit:			;pb1
 
 ser temp
 out PORTC, temp ; Write ones to all the LEDs
