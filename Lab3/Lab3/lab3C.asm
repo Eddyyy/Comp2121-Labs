@@ -70,6 +70,8 @@ reset_one_second:
 	clr tmp
 	rjmp main
 
+forever:
+rjmp forever
 
 
 
