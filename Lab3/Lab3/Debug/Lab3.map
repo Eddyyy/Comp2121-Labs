@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm Mon Sep 18 19:14:25 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\Lab3D.asm Tue Sep 19 00:24:32 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1360,23 +1360,16 @@ EQU  UDRE3addr    0000006e
 EQU  UTXC3addr    00000070
 EQU  INT_VECTORS_SIZE 00000072
 DEF  temp         r16
-DEF  debl         r17
-DEF  debh         r18
-DEF  templ        r20
-DEF  temph        r21
-EQU  origin       0000000f
-CSEG button0      00000009
-CSEG button1      0000001e
-CSEG wait0        0000000f
-CSEG endWait0     00000015
-CSEG equal0       00000019
-CSEG displayLED0  0000001a
-CSEG testButtonReleased0 0000001b
-CSEG buttonReleased0 0000001d
-CSEG wait1        00000024
-CSEG endWait1     0000002a
-CSEG equal1       0000002e
-CSEG displayLED1  0000002f
-CSEG testButtonReleased1 00000030
-CSEG buttonReleased1 00000032
-CSEG end          00000033
+DEF  output       r17
+DSEG SecondCounter 00000200
+DSEG TempCounter  00000201
+DSEG MinuteCounter 00000203
+CSEG RESET        00000033
+CSEG Timer0OVF    00000045
+CSEG DEFAULT      00000032
+CSEG main         0000007d
+CSEG NotSecond    00000072
+CSEG NotMinute    00000062
+CSEG Show         00000064
+CSEG EndIF        00000076
+CSEG loop         00000085

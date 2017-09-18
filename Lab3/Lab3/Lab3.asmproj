@@ -15,7 +15,7 @@
     <Name>Lab1</Name>
     <RootNamespace>Lab1</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
-    <EntryFile>$(MSBuildProjectDirectory)\lab3A.asm</EntryFile>
+    <EntryFile>$(MSBuildProjectDirectory)\Lab3D.asm</EntryFile>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
@@ -84,7 +84,13 @@
     <Compile Include="lab3B.asm">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TaskA.asm">
+    <Compile Include="lab3C.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lab3D.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test2.asm">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test1.asm">

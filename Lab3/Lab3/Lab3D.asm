@@ -31,7 +31,7 @@ RESET:
 	clr output
 	out SPL, temp
 	ser temp ; set Port C as output out 
-	DDRC, temp
+	out DDRC, temp
 	clr temp
 	out PORTC, temp
 	sts SecondCounter, temp
@@ -68,12 +68,12 @@ NotMinute:
 Show:
 	clr output
 	lds output, MinuteCounter
-	rot output
-	rot output
-	rot output
-	rot output
-	rot output
-	rot output
+	rol output
+	rol output
+	rol output
+	rol output
+	rol output
+	rol output
 	lds temp, SecondCounter
 	or output, temp
 	out PORTC, output
