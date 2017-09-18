@@ -8,30 +8,24 @@
 
 .include "m2560def.inc"
 .def temp =r16
-.equ PATTERN1 = 0x00
-.equ PATTERN2 = 0xFF
-.equ PATTERN3 = 0x1F
-
+.equ PATTERN1 = 0x5B
+.equ PATTERN2 = 0xAA
 .cseg
-
-
+.org 0x0
 ser temp
 out PORTC, temp ; Write ones to all the LEDs
-out DDRC, temp
-out PORTF, temp ; Enable pull-up resistors on PORTF
+out DDRC, temp ; PORTC is all outputs
+out PORTD, temp ; Enable pull-up resistors on PORTF
 clr temp
-
-out DDRF, temp ; PORTF is all inputs
-
+out DDRD, temp ; PORTF is all inputs
 switch0:
-sbic PINF, 0 ; Skip the next instruction if PB0 is pushed
+sbic PIND, 0 ; Skip the next instruction if PB0 is pushed
 rjmp switch1 ; If not pushed, check the other switch
-dec temp ; subtract 1 to the LEDs if the switch was pushed
+ldi temp, PATTERN1 ; Store PATTERN1 to the LEDs if the switch was pushed
 out PORTC, temp
-
 switch1:
-sbic PINF, 1 ; Skip the next instruction if PB1 is pushed
+sbic PIND, 1 ; Skip the next instruction if PB1 is pushed
 rjmp switch0 ; If not pushed, check the other switch
-inc temp  ; Add 1 to the LEDs if the switch was pushed
+ldi temp, PATTERN2 ; Store PATTERN2 to the LEDs if the switch was pushed
 out PORTC, temp
-rjmp switch0 ; Now check PB0 again
+rjmp switch0 ; Now check PB0 again

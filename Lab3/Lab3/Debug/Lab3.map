@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm Mon Sep 18 02:34:55 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm Mon Sep 18 19:14:25 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1365,18 +1365,18 @@ DEF  debh         r18
 DEF  templ        r20
 DEF  temph        r21
 EQU  origin       0000000f
-CSEG button0      00000209
-CSEG wait0        00000211
-CSEG endWait0     00000217
-CSEG equal0       0000021b
-CSEG displayLED0  0000021c
-CSEG testButtonReleased0 0000021d
-CSEG buttonReleased0 00000221
-CSEG button1      00000222
-CSEG wait1        0000022a
-CSEG endWait1     00000230
-CSEG equal1       00000234
-CSEG displayLED1  00000235
-CSEG testButtonReleased1 00000236
-CSEG buttonReleased1 0000023a
-CSEG end          0000023b
+CSEG button0      00000009
+CSEG button1      0000001e
+CSEG wait0        0000000f
+CSEG endWait0     00000015
+CSEG equal0       00000019
+CSEG displayLED0  0000001a
+CSEG testButtonReleased0 0000001b
+CSEG buttonReleased0 0000001d
+CSEG wait1        00000024
+CSEG endWait1     0000002a
+CSEG equal1       0000002e
+CSEG displayLED1  0000002f
+CSEG testButtonReleased1 00000030
+CSEG buttonReleased1 00000032
+CSEG end          00000033

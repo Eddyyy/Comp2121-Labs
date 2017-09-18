@@ -13,25 +13,25 @@
 .equ origin = 0x0F
 
 .cseg
-.org 0x200
+.org 0x0
 
 ldi temp, origin
 out PORTC, temp
 ser temp
 out DDRC, temp
-out PORTD, temp
+out PORTF, temp
 clr temp
-out DDRD, temp 
+out DDRF, temp 
 
 ldi temp, origin
 out PORTC, temp
 
+;)
+
 ;----------------button0----------------
 button0:
-	in r19, PIND
-	andi  r19, (1<<0)
-	cpi r19, (1<<0)
-	breq button0
+	sbic PINF, 0
+	rjmp button1
 
 clr debl
 clr debh
@@ -59,20 +59,17 @@ displayLED0:
 	out PORTC, temp
 
 testButtonReleased0:
-	in r19, PIND
-	andi  r19, (1<<0)
-	cpi r19, (1<<0)
-	brne testButtonReleased0
+	sbis PINF, 0
+	rjmp testButtonReleased0
 
 buttonReleased0:
 	rjmp button1
 
+
 ;------------------button1------------------
 button1:
-	in r19, PIND
-	andi  r19, (1<<1)
-	cpi r19, (1<<1)
-	breq button1
+	sbic PINF, 1
+	rjmp button0
 
 clr debl
 clr debh
@@ -100,13 +97,13 @@ displayLED1:
 	out PORTC, temp
 
 testButtonReleased1:
-	in r19, PIND
-	andi  r19, (1<<1)
-	cpi r19, (1<<1)
-	brne testButtonReleased1
-
+	sbis PINF, 1
+	rjmp testButtonReleased1
+	
 buttonReleased1:
 	rjmp button0
+
+
 
 
 end: rjmp end

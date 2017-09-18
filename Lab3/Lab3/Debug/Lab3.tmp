@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc</FILE>
  </INCLUDED_FILES>
@@ -22,20 +22,20 @@
   <FILE>Lab3.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <button0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>30</LINE></button0>
-  <wait0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>40</LINE></wait0>
-  <endWait0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>48</LINE></endWait0>
-  <equal0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>55</LINE></equal0>
-  <displayLED0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>58</LINE></displayLED0>
-  <testButtonReleased0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>61</LINE></testButtonReleased0>
-  <buttonReleased0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>67</LINE></buttonReleased0>
-  <button1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>71</LINE></button1>
-  <wait1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>81</LINE></wait1>
-  <endWait1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>89</LINE></endWait1>
-  <equal1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>96</LINE></equal1>
-  <displayLED1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>99</LINE></displayLED1>
-  <testButtonReleased1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>102</LINE></testButtonReleased1>
-  <buttonReleased1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>108</LINE></buttonReleased1>
-  <end><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm</FILE><LINE>112</LINE></end>
+  <button0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>32</LINE></button0>
+  <button1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>70</LINE></button1>
+  <wait0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>40</LINE></wait0>
+  <endWait0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>48</LINE></endWait0>
+  <equal0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>55</LINE></equal0>
+  <displayLED0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>58</LINE></displayLED0>
+  <testButtonReleased0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>61</LINE></testButtonReleased0>
+  <buttonReleased0><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>65</LINE></buttonReleased0>
+  <wait1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>78</LINE></wait1>
+  <endWait1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>86</LINE></endWait1>
+  <equal1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>93</LINE></equal1>
+  <displayLED1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>96</LINE></displayLED1>
+  <testButtonReleased1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>99</LINE></testButtonReleased1>
+  <buttonReleased1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>103</LINE></buttonReleased1>
+  <end><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm</FILE><LINE>109</LINE></end>
  </LABELS>
 </ASSEMBLER_INFO>

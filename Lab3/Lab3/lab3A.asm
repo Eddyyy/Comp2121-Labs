@@ -1,71 +1,109 @@
+/*
+ * test1.asm
+ * a program to purely explore the buttons  and LEDs
+ *  Created: 17/09/2017 9:38:21 PM
+ *   Author: Edward
+ */ 
 .include "m2560def.inc"
 .def temp = r16
-.def flag0 = r17
-.def flag1 = r18
+.def debl = r17
+.def debh = r18
+.def templ = r20
+.def temph = r21
 .equ origin = 0x0F
 
 .cseg
 .org 0x0
-clr flag0
-clr flag1
 
 ldi temp, origin
-out PORTC, temp 			; Write ones to all the LEDs
-out DDRC, temp 				; PORTC is all outputs
-ser temp
-out PORTD, temp 			; Enable pull-up resistors on PORTF
-clr temp
-out DDRD, temp 				; PORTF is all inputs
-
-ldi temp, origin				;15 = 0b00001111 = 0x0F
 out PORTC, temp
-nop
-nop
-;-----------------------------------------
-switch0:
-in r19, PIND			; need to store the value of PIND into a register
-andi  r19, (1<<0)		; then compare that register with (not pushed)
-cpi r19, (1<<0)
-brne instruction1			; If not pushed, check the other switch flag
-clr flag0
-rjmp switch1
+ser temp
+out DDRC, temp
+out PORTF, temp
+clr temp
+out DDRF, temp 
 
-instruction0:
-cpi flag0, 1
-breq switch1
+ldi temp, origin
+out PORTC, temp
 
-ldi flag0, 1
-cpi temp, 0
+;)
+
+;----------------button0----------------
+button0:
+	sbic PINF, 0
+	rjmp button1
+
+clr debl
+clr debh
+ldi templ, 1
+clr temph
+wait0:
+	cpi debh, 255
+	breq endWait0
+
+	add debl, templ
+	adc debh, temph
+	nop
+rjmp wait0
+endWait0:
+
+
+cpi temp, 0		; if temp ==0
 breq equal0
-dec temp
-rjmp epilogue0
-equal0:
+dec temp		; else temp--;
+rjmp displayLED0
+equal0:			; set temp back to 15 or 0x0F or 0b00001111
 	ldi temp, origin
-epilogue0:
+
+displayLED0:
 	out PORTC, temp
 
-;------------------------------------------
-switch1:
-in r19, PIND
-andi  r19, (1<<1)
-cpi r19, (1<<1)
-brne instruction0			; If not pushed, check the other switch flag
-clr flag1
-rjmp switch0
+testButtonReleased0:
+	sbis PINF, 0
+	rjmp testButtonReleased0
+
+buttonReleased0:
+	rjmp button1
 
 
-instruction1:
-cpi flag1, 1
-breq switch0
+;------------------button1------------------
+button1:
+	sbic PINF, 1
+	rjmp button0
 
-ldi flag1, 1
-cpi temp, origin
-breq equal2
-inc temp
-rjmp epilogue2
-equal2:
+clr debl
+clr debh
+ldi templ, 1
+clr temph
+wait1:
+	cpi debh, 255
+	breq endWait1
+
+	add debl, templ
+	adc debh, temph
+	nop
+rjmp wait1
+endWait1:
+
+
+cpi temp, origin		; if temp == 0b00001111
+breq equal1
+inc temp		; else temp++;
+rjmp displayLED1
+equal1:			; set temp back to 0
 	ldi temp, 0
-epilogue2:
-	out PORTC, temp
-	rjmp switch0 			; Now check PB0 again
 
+displayLED1:
+	out PORTC, temp
+
+testButtonReleased1:
+	sbis PINF, 1
+	rjmp testButtonReleased1
+	
+buttonReleased1:
+	rjmp button0
+
+
+
+
+end: rjmp end

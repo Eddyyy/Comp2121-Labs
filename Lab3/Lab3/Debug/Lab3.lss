@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm Mon Sep 18 02:34:55 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm Mon Sep 18 19:14:25 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
-C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
-C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3A.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
                                  
                                  /*
                                  
@@ -1901,100 +1901,97 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\test1.asm(7): Including
                                  .equ origin = 0x0F
                                  
                                  .cseg
-                                 .org 0x200
+                                 .org 0x0
                                  
-000200 e00f                      ldi temp, origin
-000201 b908                      out PORTC, temp
-000202 ef0f                      ser temp
-000203 b907                      out DDRC, temp
-000204 b90b                      out PORTD, temp
-000205 2700                      clr temp
-000206 b90a                      out DDRD, temp 
+000000 e00f                      ldi temp, origin
+000001 b908                      out PORTC, temp
+000002 ef0f                      ser temp
+000003 b907                      out DDRC, temp
+000004 bb01                      out PORTF, temp
+000005 2700                      clr temp
+000006 bb00                      out DDRF, temp 
                                  
-000207 e00f                      ldi temp, origin
-000208 b908                      out PORTC, temp
+000007 e00f                      ldi temp, origin
+000008 b908                      out PORTC, temp
+                                 
+                                 ;)
                                  
                                  ;----------------button0----------------
                                  button0:
-000209 b139                      	in r19, PIND
-00020a 7031                      	andi  r19, (1<<0)
-00020b 3031                      	cpi r19, (1<<0)
-00020c f3e1                      	breq button0
+000009 9978                      	sbic PINF, 0
+00000a c013                      	rjmp button1
                                  
-00020d 2711                      clr debl
-00020e 2722                      clr debh
-00020f e041                      ldi templ, 1
-000210 2755                      clr temph
+00000b 2711                      clr debl
+00000c 2722                      clr debh
+00000d e041                      ldi templ, 1
+00000e 2755                      clr temph
                                  wait0:
-000211 3f2f                      	cpi debh, 255
-000212 f021                      	breq endWait0
+00000f 3f2f                      	cpi debh, 255
+000010 f021                      	breq endWait0
                                  
-000213 0f14                      	add debl, templ
-000214 1f25                      	adc debh, temph
-000215 0000                      	nop
-000216 cffa                      rjmp wait0
+000011 0f14                      	add debl, templ
+000012 1f25                      	adc debh, temph
+000013 0000                      	nop
+000014 cffa                      rjmp wait0
                                  endWait0:
                                  
                                  
-000217 3000                      cpi temp, 0		; if temp ==0
-000218 f011                      breq equal0
-000219 950a                      dec temp		; else temp--;
-00021a c001                      rjmp displayLED0
+000015 3000                      cpi temp, 0		; if temp ==0
+000016 f011                      breq equal0
+000017 950a                      dec temp		; else temp--;
+000018 c001                      rjmp displayLED0
                                  equal0:			; set temp back to 15 or 0x0F or 0b00001111
-00021b e00f                      	ldi temp, origin
+000019 e00f                      	ldi temp, origin
                                  
                                  displayLED0:
-00021c b908                      	out PORTC, temp
+00001a b908                      	out PORTC, temp
                                  
                                  testButtonReleased0:
-00021d b139                      	in r19, PIND
-00021e 7031                      	andi  r19, (1<<0)
-00021f 3031                      	cpi r19, (1<<0)
-000220 f7e1                      	brne testButtonReleased0
+00001b 9b78                      	sbis PINF, 0
+00001c cffe                      	rjmp testButtonReleased0
                                  
                                  buttonReleased0:
-000221 c000                      	rjmp button1
+00001d c000                      	rjmp button1
+                                 
                                  
                                  ;------------------button1------------------
                                  button1:
-000222 b139                      	in r19, PIND
-000223 7032                      	andi  r19, (1<<1)
-000224 3032                      	cpi r19, (1<<1)
-000225 f3e1                      	breq button1
+00001e 9979                      	sbic PINF, 1
+00001f cfe9                      	rjmp button0
                                  
-000226 2711                      clr debl
-000227 2722                      clr debh
-000228 e041                      ldi templ, 1
-000229 2755                      clr temph
+000020 2711                      clr debl
+000021 2722                      clr debh
+000022 e041                      ldi templ, 1
+000023 2755                      clr temph
                                  wait1:
-00022a 3f2f                      	cpi debh, 255
-00022b f021                      	breq endWait1
+000024 3f2f                      	cpi debh, 255
+000025 f021                      	breq endWait1
                                  
-00022c 0f14                      	add debl, templ
-00022d 1f25                      	adc debh, temph
-00022e 0000                      	nop
-00022f cffa                      rjmp wait1
+000026 0f14                      	add debl, templ
+000027 1f25                      	adc debh, temph
+000028 0000                      	nop
+000029 cffa                      rjmp wait1
                                  endWait1:
                                  
                                  
-000230 300f                      cpi temp, origin		; if temp == 0b00001111
-000231 f011                      breq equal1
-000232 9503                      inc temp		; else temp++;
-000233 c001                      rjmp displayLED1
+00002a 300f                      cpi temp, origin		; if temp == 0b00001111
+00002b f011                      breq equal1
+00002c 9503                      inc temp		; else temp++;
+00002d c001                      rjmp displayLED1
                                  equal1:			; set temp back to 0
-000234 e000                      	ldi temp, 0
+00002e e000                      	ldi temp, 0
                                  
                                  displayLED1:
-000235 b908                      	out PORTC, temp
+00002f b908                      	out PORTC, temp
                                  
                                  testButtonReleased1:
-000236 b139                      	in r19, PIND
-000237 7032                      	andi  r19, (1<<1)
-000238 3032                      	cpi r19, (1<<1)
-000239 f7e1                      	brne testButtonReleased1
-                                 
+000030 9b79                      	sbis PINF, 1
+000031 cffe                      	rjmp testButtonReleased1
+                                 	
                                  buttonReleased1:
-00023a cfce                      	rjmp button0
+000032 cfd6                      	rjmp button0
+                                 
+                                 
                                  
                                  
 
@@ -2016,38 +2013,38 @@ counted separately from r26..r31 here.
 "ATmega2560" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  17 r17:   4 r18:   6 r19:  12 r20:   4 
+r13:   0 r14:   0 r15:   0 r16:  17 r17:   4 r18:   6 r19:   0 r20:   4 
 r21:   4 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 6 out of 35 (17.1%)
+Registers used: 5 out of 35 (14.3%)
 
 "ATmega2560" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   2 add   :   2 adiw  :   0 and   :   0 
-andi  :   4 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   6 brge  :   0 brhc  :   0 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   4 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   2 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   7 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   8 cpse  :   0 dec   :   1 eicall:   0 eijmp :   0 elpm  :   0 
+cpi   :   4 cpse  :   0 dec   :   1 eicall:   0 eijmp :   0 elpm  :   0 
 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 ijmp  :   0 
-in    :   4 inc   :   1 jmp   :   0 ld    :   0 ldd   :   0 ldi   :   6 
+in    :   0 inc   :   1 jmp   :   0 ld    :   0 ldd   :   0 ldi   :   6 
 lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 
 mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   2 or    :   0 
 ori   :   0 out   :   7 pop   :   0 push  :   0 rcall :   0 ret   :   0 
-reti  :   0 rjmp  :   7 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
-sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 sbrc  :   0 
+reti  :   0 rjmp  :  11 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
+sbi   :   0 sbic  :   2 sbis  :   2 sbiw  :   0 sbr   :   0 sbrc  :   0 
 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 ser   :   1 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 15 out of 116 (12.9%)
+Instructions used: 14 out of 116 (12.1%)
 
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000400 0x000478    120      0    120  262144   0.0%
+[.cseg] 0x000000 0x000068    104      0    104  262144   0.0%
 [.dseg] 0x000200 0x000200      0      0      0    8192   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 
