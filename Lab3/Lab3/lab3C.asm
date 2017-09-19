@@ -1,88 +1,63 @@
-.include "m2560def.inc"
+; lab03C.asm
+.include "m2560def.inc" 
+.def second =r16 
+.def count=r17
+.def num=r18
+.def fin=r19
+.def mint=r20
+.def temp=r21
+.def tmp=r22
+.cseg 
+.org 0x0 
 
-.def sec_lim_0 = r15
-.def sec_lim_1 = r16
-.def sec_lim_2 = r17
-.def tmp = r23
-.def inc_0 = r19
-.def inc_1 = r20
-.def inc_2 = r21
-.def empty = r12
-.def one = r13
-.def second = r18
-.def min = r22
+;ser second
+;ser mint
+ser tmp
+ldi mint,0
+ldi second,0
+out DDRC, tmp
+nop
+out PORTC, mint                  ; Write ones to all the LEDs 
+             ; PORTC is all outputs 
+ldi temp, 4
+; out PORTC, temp
+ldi num, 0
+ldi fin, 0
+ldi count,0
 
-.cseg
-	.org 0x0
-	jmp RESET
+loop: 
+loop2:
+inc num
+cpi num, 255
+brne loop4
+rjmp inc1 
 
-	.org 0x200
-	RESET:
-	clr empty
-	clr inc_0
-	clr inc_1
-	clr inc_2
-	clr one
-	inc one
-	clr sec_lim_0	;equivalent of ldi sec_lim_0, 0b00000000
-	ldi sec_lim_1, 0b01101010
-	ldi sec_lim_2, 0b00000000
-	clr min
-	clr second
+loop4:
+inc count
+;out portc, count
+cpi count, 255
+brne loop6
+clr count
+rjmp loop2
 
-	ser tmp
-	out DDRC, tmp
-	clr tmp
-	out PORTC,tmp
+loop6:
+inc fin
+;out portc,fin
+cpi fin, 58
+brne loop6
+clr fin
+rjmp loop4  
 
-
-	;00011000 01101010 00000000 = 1.6MHz
-	;11110100 00100100 00000000 = 16MHz
-
-main:
-one_second_loop: ;run for one single second
-	add inc_0, one
-	adc inc_1, empty
-	adc inc_2, empty
-	out PORTC, inc_0
-	cp inc_0, sec_lim_0
-	cpc inc_1, sec_lim_1
-	cpc inc_2, sec_lim_2
-	brlo one_second_loop
-
-end_one_second:
-	inc second
-	cpi second, 60
-	brlo show;
-	clr second
-	inc min
-show:
-	mov tmp, min
-	;clr r24
-	;rol tmp  rotate minutes to bit7:6
-	;ldi r24,64
-	;mul tmp, r24
-	;add tmp, r0
-	clr tmp
-	or second, tmp; combin minutes and second into tmp
-do_show:
-	out PORTC,tmp
-	nop
-	nop
-
-reset_one_second:
-	clr inc_0
-	clr inc_1
-	clr inc_2
-	clr tmp
-	rjmp main
-
-forever:
-rjmp forever
-
-
-
-
-
-
-
+inc1:
+;out PORTC, temp
+cpi second,60  ; when second =60, mint= 59 second
+breq inc2
+inc second
+mov mint, second  ;when second = 59, mint=59
+out PORTC, mint
+rjmp loop
+inc2: 
+add second, temp  ; mint =b1000000=64
+mov mint, second
+out PORTC, mint
+rjmp loop
