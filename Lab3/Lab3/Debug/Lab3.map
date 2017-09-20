@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 20 13:04:02 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 20 14:51:59 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1361,19 +1361,18 @@ EQU  UTXC3addr    00000070
 EQU  INT_VECTORS_SIZE 00000072
 DEF  temp         r16
 DEF  pattern      r17
-DEF  debounce     r18
-DEF  de2          r19
+DEF  de0          r18
+DEF  de1          r19
+DEF  de2          r20
 EQU  origin       0000000f
 CSEG RESET        00000006
 CSEG EXT_INT0     0000001a
 CSEG EXT_INT1     00000031
-CSEG main         0000004b
-CSEG loop         0000001d
-CSEG loopa        0000001e
+CSEG main         00000048
+CSEG L1@wait@3731 00000020
 CSEG equal        0000002a
 CSEG epilogue     0000002b
-CSEG loop2        00000035
-CSEG loopb        00000036
-CSEG equal2       00000042
-CSEG epilogue2    00000043
-CSEG keepgoing    0000004c
+CSEG L1@wait@3767 00000037
+CSEG equal2       00000041
+CSEG epilogue2    00000042
+CSEG keepgoing    00000049

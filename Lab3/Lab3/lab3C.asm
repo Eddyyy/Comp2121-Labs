@@ -31,7 +31,7 @@ loop: ;wait one second
 
 		loop4:
 		inc count
-		cpi count, 255
+		cpi count, 100
 		brne loop6
 		clr count
 		rjmp loop2

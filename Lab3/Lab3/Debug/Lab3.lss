@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 20 13:04:02 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 20 14:51:59 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
@@ -1889,9 +1889,22 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
                                  ; ***** END OF FILE ******************************************************
                                  .def temp =r16
                                  .def pattern =r17
-                                 .def debounce = r18
-                                 .def de2 = r19
+                                 .def de0 = r18
+                                 .def de1 = r19
+                                 .def de2 = r20
                                  .equ origin = 0x0F
+                                 
+                                 .macro wait ;nop 160 ms
+                                     ldi  @0, 13
+                                     ldi  @1, 253
+                                     ldi  @2, 160
+                                 L1: dec  @2
+                                     brne L1
+                                     dec  @1
+                                     brne L1
+                                     dec  @0
+                                     brne L1
+                                 .endmacro
                                  
                                  .cseg
                                  .org 0x0
@@ -1912,8 +1925,8 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 00000c b908                      out PORTC, temp 			; Write ones to all the LEDs
 00000d b907                      out DDRC, temp 
 00000e 2700                      clr temp
-00000f b90a                      out DDRD, temp
-000010 b90b                      out PORTD, temp
+00000f bb00                      out DDRF, temp
+000010 bb01                      out PORTF, temp
 000011 e00a                      ldi temp, (1 << ISC11) | (1 << ISC01)	;set INT0, 1 as falling-edge triggered interrupt
 000012 9300 0069                 sts EICRA, temp ; 
 000014 b30d                      in temp, EIMSK	;enable INT0
@@ -1921,7 +1934,7 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 000016 bb0d                      out EIMSK, temp
 000017 9478                      sei ;enable Global Interrupt
                                  
-000018 940c 004b                 jmp main
+000018 940c 0048                 jmp main
                                  
                                  EXT_INT0:
                                  ;-------------prologue-------------
@@ -1930,17 +1943,15 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 00001c 930f                      push temp
                                  
                                  ;-------------main-------------
-                                 loop:
-00001d 9523                      	inc debounce
-                                 	loopa:
-00001e 9533                      		inc de2
-00001f 0000                      		nop ;wait
-000020 3f3f                      		cpi de2, 255
-000021 f3e0                      		brlo loopa
-000022 2733                      		clr de2
-000023 3f2f                      	cpi debounce, 255
-000024 f3c0                      	brlo loop
-000025 2722                      clr debounce
+00001d e02d
+00001e ef3d
+00001f ea40
+000020 954a
+000021 f7f1
+000022 953a
+000023 f7e1
+000024 952a
+000025 f7d1                      wait de0, de1, de2
                                  
 000026 3010                      cpi pattern, 0
 000027 f011                      breq equal
@@ -1963,47 +1974,39 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including
 000031 930f                      push temp
 000032 b70f                      in temp, SREG
 000033 930f                      push temp
-000034 931f                      push pattern
-                                 ;in yl, SPL
-                                 ;in yh, SPH
                                  
                                  ;-------------main-------------
-                                 loop2:
-000035 9523                      	inc debounce
-                                 	loopb:	;255*255/16MHz
-000036 9533                      		inc de2
-000037 0000                      		nop ; wait
-000038 3f3f                      		cpi de2, 255
-000039 f3e0                      		brlo loopb
-00003a 2733                      		clr de2
-00003b 3f2f                      	cpi debounce, 255
-00003c f3c0                      	brlo loop2
-00003d 2722                      clr debounce
+000034 e02d
+000035 ef3d
+000036 ea40
+000037 954a
+000038 f7f1
+000039 953a
+00003a f7e1
+00003b 952a
+00003c f7d1                      wait de0, de1, de2
                                  
-                                 ;ld pattern, Y
-00003e 301f                      cpi pattern, origin
-00003f f011                      breq equal2
-000040 9513                      inc pattern
-000041 c001                      rjmp epilogue2
+00003d 301f                      cpi pattern, origin
+00003e f011                      breq equal2
+00003f 9513                      inc pattern
+000040 c001                      rjmp epilogue2
                                  equal2:
-000042 e010                      	ldi pattern, 0
+000041 e010                      	ldi pattern, 0
                                  
                                  ;--------epilogue-----------
                                  epilogue2:
-000043 8318                      st Y, pattern
-000044 2f01                      mov temp, pattern
-000045 911f                      pop pattern
-000046 b908                      out PORTC, temp
-000047 910f                      pop temp
-000048 bf0f                      out SREG, temp
-000049 910f                      pop temp
-00004a 9518                      reti
+000042 2f01                      mov temp, pattern
+000043 b908                      out PORTC, temp
+000044 910f                      pop temp
+000045 bf0f                      out SREG, temp
+000046 910f                      pop temp
+000047 9518                      reti
                                  
                                  main: ; main - does nothing but increment a counter
-00004b 2700                      clr temp
+000048 2700                      clr temp
                                  keepgoing:
-00004c 9503                      inc temp
-00004d 0000                      nop
+000049 9503                      inc temp
+00004a 0000                      nop
 
 
 RESOURCE USE INFORMATION
@@ -2021,9 +2024,9 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega2560" register use summary:
-x  :   0 y  :   1 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
+x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  34 r17:  11 r18:   6 r19:   6 r20:   0 
+r13:   0 r14:   0 r15:   0 r16:  34 r17:   8 r18:   4 r19:   4 r20:   4 
 r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
 Registers used: 5 out of 35 (14.3%)
@@ -2032,29 +2035,29 @@ Registers used: 5 out of 35 (14.3%)
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   4 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
+brne  :   6 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   6 cls   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   2 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   6 cpse  :   0 dec   :   1 eicall:   0 eijmp :   0 elpm  :   0 
+cpi   :   2 cpse  :   0 dec   :   7 eicall:   0 eijmp :   0 elpm  :   0 
 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 ijmp  :   0 
-in    :   3 inc   :   6 jmp   :   4 ld    :   0 ldd   :   0 ldi   :   7 
+in    :   3 inc   :   2 jmp   :   4 ld    :   0 ldd   :   0 ldi   :  13 
 lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   2 movw  :   0 
-mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   3 or    :   0 
-ori   :   1 out   :  11 pop   :   5 push  :   5 rcall :   0 ret   :   0 
+mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   1 or    :   0 
+ori   :   1 out   :  11 pop   :   4 push  :   4 rcall :   0 ret   :   0 
 reti  :   2 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 sbrc  :   0 
 sbrs  :   0 sec   :   0 seh   :   0 sei   :   1 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
-st    :   1 std   :   0 sts   :   1 sub   :   0 subi  :   0 swap  :   0 
+st    :   0 std   :   0 sts   :   1 sub   :   0 subi  :   0 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 20 out of 116 (17.2%)
+Instructions used: 19 out of 116 (16.4%)
 
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00009e    158      0    158  262144   0.1%
+[.cseg] 0x000000 0x000098    152      0    152  262144   0.1%
 [.dseg] 0x000200 0x000200      0      0      0    8192   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 

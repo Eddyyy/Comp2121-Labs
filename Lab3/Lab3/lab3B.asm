@@ -1,9 +1,22 @@
 .include "m2560def.inc"
 .def temp =r16
 .def pattern =r17
-.def debounce = r18
-.def de2 = r19
+.def de0 = r18
+.def de1 = r19
+.def de2 = r20
 .equ origin = 0x0F
+
+.macro wait ;nop 160 ms
+    ldi  @0, 13
+    ldi  @1, 253
+    ldi  @2, 160
+L1: dec  @2
+    brne L1
+    dec  @1
+    brne L1
+    dec  @0
+    brne L1
+.endmacro
 
 .cseg
 .org 0x0
@@ -24,8 +37,8 @@ ldi temp, origin
 out PORTC, temp 			; Write ones to all the LEDs
 out DDRC, temp 
 clr temp
-out DDRD, temp
-out PORTD, temp
+out DDRF, temp
+out PORTF, temp
 ldi temp, (1 << ISC11) | (1 << ISC01)	;set INT0, 1 as falling-edge triggered interrupt
 sts EICRA, temp ; 
 in temp, EIMSK	;enable INT0
@@ -42,17 +55,7 @@ in temp, SREG
 push temp
 
 ;-------------main-------------
-loop:
-	inc debounce
-	loopa:
-		inc de2
-		nop ;wait
-		cpi de2, 255
-		brlo loopa
-		clr de2
-	cpi debounce, 255
-	brlo loop
-clr debounce
+wait de0, de1, de2
 
 cpi pattern, 0
 breq equal
@@ -75,24 +78,10 @@ EXT_INT1:
 push temp
 in temp, SREG
 push temp
-push pattern
-in yl, SPL
-in yh, SPH
 
 ;-------------main-------------
-loop2:
-	inc debounce
-	loopb:	;255*255/16MHz
-		inc de2
-		nop ; wait
-		cpi de2, 255
-		brlo loopb
-		clr de2
-	cpi debounce, 255
-	brlo loop2
-clr debounce
+wait de0, de1, de2
 
-lds pattern, Y
 cpi pattern, origin
 breq equal2
 inc pattern
@@ -102,9 +91,7 @@ equal2:
 
 ;--------epilogue-----------
 epilogue2:
-sts Y, pattern
 mov temp, pattern
-pop pattern
 out PORTC, temp
 pop temp
 out SREG, temp

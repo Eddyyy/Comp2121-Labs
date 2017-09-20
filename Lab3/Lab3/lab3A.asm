@@ -12,6 +12,18 @@
 .def temph = r21
 .equ origin = 0x0F
 
+.macro wait ;nop 160 ms
+    ldi  @0, 13
+    ldi  @1, 253
+    ldi  @2, 160
+L1: dec  @2
+    brne L1
+    dec  @1
+    brne L1
+    dec  @0
+    brne L1
+.endmacro
+
 .cseg
 .org 0x0
 
@@ -33,20 +45,7 @@ button0:
 	sbic PINF, 0
 	rjmp button1
 
-clr debl
-clr debh
-ldi templ, 1
-clr temph
-wait0:
-	cpi debh, 255
-	breq endWait0
-
-	add debl, templ
-	adc debh, temph
-	nop
-rjmp wait0
-endWait0:
-
+wait debl, debh, templ;, temph
 
 cpi temp, 0		; if temp ==0
 breq equal0
@@ -71,19 +70,7 @@ button1:
 	sbic PINF, 1
 	rjmp button0
 
-clr debl
-clr debh
-ldi templ, 1
-clr temph
-wait1:
-	cpi debh, 255
-	breq endWait1
-
-	add debl, templ
-	adc debh, temph
-	nop
-rjmp wait1
-endWait1:
+	wait debl, debh, templ;, temph
 
 
 cpi temp, origin		; if temp == 0b00001111
