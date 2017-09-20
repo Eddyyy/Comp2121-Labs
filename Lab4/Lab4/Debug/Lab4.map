@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm Wed Sep 20 15:16:13 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm Wed Sep 20 15:18:38 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1359,12 +1359,4 @@ EQU  URXC3addr    0000006c
 EQU  UDRE3addr    0000006e
 EQU  UTXC3addr    00000070
 EQU  INT_VECTORS_SIZE 00000072
-DEF  a_l          r16
-DEF  a_h          r17
-DEF  b_l          r18
-DEF  b_h          r19
-CSEG while        00000004
-CSEG return       00000011
-CSEG if           00000007
-CSEG else         0000000e
-CSEG endLoop      00000010
+CSEG return       00000000

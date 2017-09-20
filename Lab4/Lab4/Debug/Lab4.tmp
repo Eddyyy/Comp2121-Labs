@@ -22,10 +22,6 @@
   <FILE>Lab4.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <while><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm</FILE><LINE>23</LINE></while>
-  <return><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm</FILE><LINE>44</LINE></return>
-  <if><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm</FILE><LINE>27</LINE></if>
-  <else><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm</FILE><LINE>36</LINE></else>
-  <endLoop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm</FILE><LINE>41</LINE></endLoop>
+  <return><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4A.asm</FILE><LINE>13</LINE></return>
  </LABELS>
 </ASSEMBLER_INFO>
