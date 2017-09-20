@@ -91,10 +91,7 @@ EndIF:
  reti ; return from the interrupt
 
  main:
- ldi leds, 0xFF ; main program starts here
- out PORTC, leds ; set all LEDs on at the beginning
- ldi leds, PATTERN
- 
+
  clear TempCounter ; initialize the temporary counter to 0
  clear SecondCounter ; initialize the second counter to 0
  clr second
