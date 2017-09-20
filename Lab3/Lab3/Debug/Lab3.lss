@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\Lab3D.asm Tue Sep 19 00:24:32 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm Wed Sep 20 13:04:02 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
-C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\Lab3D.asm(3): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
-C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\Lab3D.asm(3): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
+C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\lab3B.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
                                  
-                                 ;I almost copy everything from lecture note, Some of them that I did not really understand
+                                 .include "m2560def.inc"
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega2560.xml **********
                                  ;*************************************************************************
@@ -1844,8 +1844,6 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\Lab3D.asm(3): Including
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ;I does not really understand How the timer0 working, So the basic structure of timer0 is same as the lecture note
-                                 .include "m2560def.inc"
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega2560.xml **********
                                  ;*************************************************************************
@@ -1889,112 +1887,123 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab3\Lab3\Lab3D.asm(3): Including
                                  #endif  /* _M2560DEF_INC_ */
                                  
                                  ; ***** END OF FILE ******************************************************
-                                 .def temp= r16
-                                 .def output = r17
-                                 
-                                 .macro clear
-                                 ldi YL, low(@0)
-                                 ldi YH, high(@0)
-                                 clr temp
-                                 st Y+, temp st Y, temp
-                                 .endmacro
-                                 
-                                 .dseg
-000200                           SecondCounter: .byte 1
-000201                           TempCounter: .byte 2
-000203                           MinuteCounter: .byte 1
+                                 .def temp =r16
+                                 .def pattern =r17
+                                 .def debounce = r18
+                                 .def de2 = r19
+                                 .equ origin = 0x0F
                                  
                                  .cseg
-                                 .org 0x0000
-000000 940c 0033                 jmp RESET
-                                 .org OVF0addr
-00002e 940c 0045                 jmp Timer0OVF
-000030 940c 0032                 jmp DEFAULT 
-000032 9518                      DEFAULT: reti
+                                 .org 0x0
+000000 940c 0006                 jmp RESET
+                                 .org INT0addr ; Jump to the interrupt handler, INT0addr is the address of EXT_INT0
+000002 940c 001a                 jmp EXT_INT0
+                                 .org INT1addr ; INT1addr is the address of EXT_INT1
+000004 940c 0031                 jmp EXT_INT1
                                  
+                                 RESET:
+000006 e00f                      ldi temp, origin
+000007 ef0f                      ldi temp, low(RAMEND)
+000008 bf0d                      out SPL, temp
+000009 e201                      ldi temp, high(RAMEND)
+00000a bf0e                      out SPH, temp
                                  
-                                 RESET: 
-000033 e201                      	ldi temp, high(RAMEND) ; initialize the stack pointer SP out SPH, temp
-000034 ef0f                      	ldi temp, low(RAMEND)
-000035 2711                      	clr output
-000036 bf0d                      	out SPL, temp
-000037 ef0f                      	ser temp ; set Port C as output out 
-000038 b907                      	out DDRC, temp
-000039 2700                      	clr temp
-00003a b908                      	out PORTC, temp
-00003b 9300 0200                 	sts SecondCounter, temp
-00003d 9300 0203                 	sts MinuteCounter, temp
-00003f e0c1
-000040 e0d2
-000041 2700
-000042 9309
-000043 8308                      	clear TempCounter
-000044 c038                      	rjmp main 
+00000b e00f                      ldi temp, origin
+00000c b908                      out PORTC, temp 			; Write ones to all the LEDs
+00000d b907                      out DDRC, temp 
+00000e 2700                      clr temp
+00000f b90a                      out DDRD, temp
+000010 b90b                      out PORTD, temp
+000011 e00a                      ldi temp, (1 << ISC11) | (1 << ISC01)	;set INT0, 1 as falling-edge triggered interrupt
+000012 9300 0069                 sts EICRA, temp ; 
+000014 b30d                      in temp, EIMSK	;enable INT0
+000015 6003                      ori temp, (1<<INT0) | (1<<INT1)
+000016 bb0d                      out EIMSK, temp
+000017 9478                      sei ;enable Global Interrupt
                                  
-                                 Timer0OVF:
-000045 b70f                      	in temp, SREG
-000046 930f                      	push temp 
-000047 93df                      	push YH 
-000048 93cf                      	push YL 
-000049 939f                      	push r25 
-00004a 938f                      	push r24
-00004b 9180 0201                 	lds r24, TempCounter
-00004d 9601                      	adiw r25:r24, 1
-00004e 3884                      	cpi r24, low(7812)
-00004f e10e                      	ldi temp, high(7812)
-000050 0790                      	cpc r25, temp
-000051 f501                      	brne NotSecond
+000018 940c 004b                 jmp main
                                  
-000052 e0c1
-000053 e0d2
-000054 2700
-000055 9309
-000056 8308                      	clear TempCounter
-                                 	; Load the value of the second counter
-000057 9180 0200                 	lds r24, SecondCounter
-000059 9583                      	inc r24
-00005a 338c                      	cpi r24, 60
-00005b f030                      	brlo NotMinute
-00005c 2788                      	clr r24; initialize The SecondCounter
-00005d 9190 0203                 	lds r25, MinuteCounter
-00005f 9593                      	inc r25
-000060 9390 0203                 	sts MinuteCounter, r25
-                                 NotMinute:
-000062 9380 0200                 	sts SecondCounter, r24 
-                                 Show:
-000064 2711                      	clr output
-000065 9110 0203                 	lds output, MinuteCounter
-000067 1f11                      	rol output
-000068 1f11                      	rol output
-000069 1f11                      	rol output
-00006a 1f11                      	rol output
-00006b 1f11                      	rol output
-00006c 1f11                      	rol output
-00006d 9100 0200                 	lds temp, SecondCounter
-00006f 2b10                      	or output, temp
-000070 b918                      	out PORTC, output
-000071 c004                      	rjmp EndIF
-                                 NotSecond: ; store the new value of the temporary counter 
-000072 9380 0201                 	sts TempCounter, r24
-000074 9390 0202                 	sts TempCounter+1, r25
-                                 EndIF:
-000076 918f                      	pop r24
-000077 919f                      	pop r25
-000078 91cf                      	pop YL
-000079 91df                      	pop YH
-00007a 910f                      	pop temp
-00007b bf0f                      	out SREG, temp
-00007c 9518                      	reti
+                                 EXT_INT0:
+                                 ;-------------prologue-------------
+00001a 930f                      push temp
+00001b b70f                      in temp, SREG
+00001c 930f                      push temp
                                  
-                                 main:
-                                 	; I don't really understand the following part, So I just copy from lecture note and keep the same process for one second
-00007d e000                      	ldi temp, 0b00000000 
-00007e bd04                      	out TCCR0A, temp 
-00007f e002                      	ldi temp, 0b00000010 
-000080 bd05                      	out TCCR0B, temp 
-000081 e001                      	ldi temp, 1<<TOIE0 
-000082 9300 006e                 	sts TIMSK0, temp
-000084 9478                      	sei
+                                 ;-------------main-------------
+                                 loop:
+00001d 9523                      	inc debounce
+                                 	loopa:
+00001e 9533                      		inc de2
+00001f 0000                      		nop ;wait
+000020 3f3f                      		cpi de2, 255
+000021 f3e0                      		brlo loopa
+000022 2733                      		clr de2
+000023 3f2f                      	cpi debounce, 255
+000024 f3c0                      	brlo loop
+000025 2722                      clr debounce
+                                 
+000026 3010                      cpi pattern, 0
+000027 f011                      breq equal
+000028 951a                      dec pattern
+000029 c001                      rjmp epilogue
+                                 equal:
+00002a e01f                      	ldi pattern, origin
+                                 
+                                 ;--------epilogue-----------
+                                 epilogue:
+00002b 2f01                      mov temp, pattern
+00002c b908                      out PORTC, temp
+00002d 910f                      pop temp
+00002e bf0f                      out SREG, temp
+00002f 910f                      pop temp
+000030 9518                      reti
+                                 
+                                 EXT_INT1:
+                                 ;-------------prologue-------------
+000031 930f                      push temp
+000032 b70f                      in temp, SREG
+000033 930f                      push temp
+000034 931f                      push pattern
+                                 ;in yl, SPL
+                                 ;in yh, SPH
+                                 
+                                 ;-------------main-------------
+                                 loop2:
+000035 9523                      	inc debounce
+                                 	loopb:	;255*255/16MHz
+000036 9533                      		inc de2
+000037 0000                      		nop ; wait
+000038 3f3f                      		cpi de2, 255
+000039 f3e0                      		brlo loopb
+00003a 2733                      		clr de2
+00003b 3f2f                      	cpi debounce, 255
+00003c f3c0                      	brlo loop2
+00003d 2722                      clr debounce
+                                 
+                                 ;ld pattern, Y
+00003e 301f                      cpi pattern, origin
+00003f f011                      breq equal2
+000040 9513                      inc pattern
+000041 c001                      rjmp epilogue2
+                                 equal2:
+000042 e010                      	ldi pattern, 0
+                                 
+                                 ;--------epilogue-----------
+                                 epilogue2:
+000043 8318                      st Y, pattern
+000044 2f01                      mov temp, pattern
+000045 911f                      pop pattern
+000046 b908                      out PORTC, temp
+000047 910f                      pop temp
+000048 bf0f                      out SREG, temp
+000049 910f                      pop temp
+00004a 9518                      reti
+                                 
+                                 main: ; main - does nothing but increment a counter
+00004b 2700                      clr temp
+                                 keepgoing:
+00004c 9503                      inc temp
+00004d 0000                      nop
 
 
 RESOURCE USE INFORMATION
@@ -2012,41 +2021,41 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATmega2560" register use summary:
-x  :   0 y  :   4 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
+x  :   0 y  :   1 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  29 r17:  11 r18:   0 r19:   0 r20:   0 
-r21:   0 r22:   0 r23:   0 r24:  11 r25:   8 r26:   0 r27:   0 r28:   4 
-r29:   4 r30:   0 r31:   0 
-Registers used: 7 out of 35 (20.0%)
+r13:   0 r14:   0 r15:   0 r16:  34 r17:  11 r18:   6 r19:   6 r20:   0 
+r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r29:   0 r30:   0 r31:   0 
+Registers used: 5 out of 35 (14.3%)
 
 "ATmega2560" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   1 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
-brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   4 brlt  :   0 brmi  :   0 
+brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   6 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   1 
-cpi   :   2 cpse  :   0 dec   :   0 eicall:   0 eijmp :   0 elpm  :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
+cpi   :   6 cpse  :   0 dec   :   1 eicall:   0 eijmp :   0 elpm  :   0 
 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 icall :   0 ijmp  :   0 
-in    :   1 inc   :   2 jmp   :   3 ld    :   0 ldd   :   0 ldi   :  10 
-lds   :   5 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 
-mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   1 
-ori   :   0 out   :   7 pop   :   5 push  :   5 rcall :   0 ret   :   0 
-reti  :   2 rjmp  :   3 rol   :   6 ror   :   0 sbc   :   0 sbci  :   0 
+in    :   3 inc   :   6 jmp   :   4 ld    :   0 ldd   :   0 ldi   :   7 
+lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   2 movw  :   0 
+mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   3 or    :   0 
+ori   :   1 out   :  11 pop   :   5 push  :   5 rcall :   0 ret   :   0 
+reti  :   2 rjmp  :   3 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 sbrc  :   0 
-sbrs  :   0 sec   :   0 seh   :   0 sei   :   1 sen   :   0 ser   :   1 
+sbrs  :   0 sec   :   0 seh   :   0 sei   :   1 sen   :   0 ser   :   0 
 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
-st    :   4 std   :   0 sts   :   7 sub   :   0 subi  :   0 swap  :   0 
+st    :   1 std   :   0 sts   :   1 sub   :   0 subi  :   0 swap  :   0 
 tst   :   0 wdr   :   0 
-Instructions used: 22 out of 116 (19.0%)
+Instructions used: 20 out of 116 (17.2%)
 
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00010c    180      0    180  262144   0.1%
-[.dseg] 0x000200 0x000204      0      4      4    8192   0.0%
+[.cseg] 0x000000 0x00009e    158      0    158  262144   0.1%
+[.dseg] 0x000200 0x000200      0      0      0    8192   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 
 Assembly complete, 0 errors, 0 warnings

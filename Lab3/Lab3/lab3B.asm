@@ -76,8 +76,8 @@ push temp
 in temp, SREG
 push temp
 push pattern
-st yl, SPL
-st yh, SPH
+in yl, SPL
+in yh, SPH
 
 ;-------------main-------------
 loop2:
@@ -92,7 +92,7 @@ loop2:
 	brlo loop2
 clr debounce
 
-std
+lds pattern, Y
 cpi pattern, origin
 breq equal2
 inc pattern
@@ -102,6 +102,7 @@ equal2:
 
 ;--------epilogue-----------
 epilogue2:
+sts Y, pattern
 mov temp, pattern
 pop pattern
 out PORTC, temp

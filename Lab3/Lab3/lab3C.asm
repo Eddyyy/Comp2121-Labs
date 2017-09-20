@@ -12,7 +12,7 @@
 ser tmp
 ldi mint, 0
 ldi second,0
-out DDRC, tmp	; Write ones to all the LEDs 
+out DDRC, tmp	; Write ones to all the LEDs and set to output
 nop
 out PORTC, mint                
              ; PORTC is all outputs 
@@ -22,26 +22,26 @@ ldi num, 0
 ldi fin, 0
 ldi count,0
 
-loop: 
-loop2:
-inc num
-cpi num, 255
-brne loop4	
-rjmp inc1 
+loop: ;wait one second
+	loop2:
+	inc num
+	cpi num, 255
+	brne loop4
+	rjmp inc1
 
-loop4:
-inc count
-cpi count, 255
-brne loop6
-clr count
-rjmp loop2
+		loop4:
+		inc count
+		cpi count, 255
+		brne loop6
+		clr count
+		rjmp loop2
 
-loop6:
-inc fin
-cpi fin, 58
-brne loop6
-clr fin
-rjmp loop4  
+			loop6:
+			inc fin
+			cpi fin, 58
+			brne loop6
+			clr fin
+			rjmp loop4  
 
 inc1:
 cpi second,60  ; when second = 60, mint= 59 second, then jump to inc2 which counts minute
