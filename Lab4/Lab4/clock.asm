@@ -184,7 +184,17 @@ EndIF:
 ;======== counting second loop ========
 
 main:
+ clear TempCounter ; initialize the temporary counter to 0
+ clear SecondCounter ; initialize the second counter to 0
 
+
+ ldi temp, 0b00000000
+ out TCCR0A, temp
+ ldi temp, 0b00000010
+ out TCCR0B, temp ; set prescalar value to 8
+ ldi temp, 1<<TOIE0 ; TOIE0 is the bit number of TOIE0 which is 0
+ sts TIMSK0, temp ; enable Timer0 Overflow Interrupt
+ sei ; enable global interrupt
 halt:
 	rjmp halt
 
