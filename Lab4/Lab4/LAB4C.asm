@@ -52,6 +52,22 @@
 	clr @4
 .endmacro
 
+.macro HalveNum
+	lsr @0
+	ror @1
+.endmacro
+
+.macro DivideTenTimes
+	movw @4:@3,@2:@1
+	HalveNum @4,@3
+	HalveNum @2,@1
+	HalveNum @2,@1
+	HalveNum @2,@1
+	sub @2,@4
+	sbc @1,@3
+	clr @3
+	clr @4
+.endmacro
 
 
 .dseg
@@ -414,7 +430,45 @@ result:
 	ldi xh,high(A)
 	ld r16,x+
 	ld r17,x
-		
+	clr r4
+	clr r5
+	clr r20
+	clr r21
+
+Forloop1:;reverse order
+	movw r19:r18, r17:r16
+	DivideTenTimes r18,r19,r24,r25
+	tentimes r18,r19,r24,r25
+	movw r5:r4,r17:r16
+	sub r5,r19
+	sbc r4,r18
+	DivideTenTimes r18,r19,r24,r25
+	movw r17:r16,r19:r18
+	tentimes r20,r21,r24,r25
+	add r21,r5
+	adc r20,r4
+	cpi r16 1
+	brsh Forloop1
+	movw r17:r16,r21:r20
+	movw r19:r18, r17:r16
+display:
+	do_lcd_command 0b00000001 ; clear display
+	do_lcd_command 0b00001110 ; Cursor on, bar, no blink
+
+displayloop:
+	DivideTenTimes r18,r19,r24,r25
+	tentimes r18,r19,r24,r25	
+	movw r5:r4,r17:r16
+	sub r5,r19
+	sbc r4,r18
+	ldi r20,0x30
+	add r4,r20
+	do_lcd_data r4
+	DivideTenTimes r18,r19,r24,r25
+	movw r17:r16,r19:r18
+	cpi r16, 1
+	brsh displayloop
+	
 endfunction:
 	pop r25
 	pop r24
