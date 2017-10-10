@@ -18,6 +18,7 @@
 .def flag = r22
 .def counter = r23
 .def sign = r24
+.def sign2 = r25
 .equ PORTLDIR = 0xF0
 .equ INITCOLMASK = 0xEF
 .equ INITROWMASK = 0x01
@@ -41,15 +42,15 @@
 .endmacro
 
 .macro tentimes
-	movw @4:@3,@2:@1
-	doubleNum @3,@4
-	doubleNum @1,@2
-	doubleNum @1,@2
-	doubleNum @1,@2
-	add @1,@3
-	adc @2,@4
+	movw @3:@2,@1:@0
+	doubleNum @2,@3
+	doubleNum @0,@1
+	doubleNum @0,@1
+	doubleNum @0,@1
+	add @0,@2
+	adc @1,@3
+	clr @2
 	clr @3
-	clr @4
 .endmacro
 
 .macro HalveNum
@@ -58,15 +59,15 @@
 .endmacro
 
 .macro DivideTenTimes
-	movw @4:@3,@2:@1
-	HalveNum @4,@3
-	HalveNum @2,@1
-	HalveNum @2,@1
-	HalveNum @2,@1
-	sub @2,@4
-	sbc @1,@3
+	movw @3:@2,@1:@0
+	HalveNum @3,@2
+	HalveNum @1,@0
+	HalveNum @1,@0
+	HalveNum @1,@0
+	sub @1,@3
+	sbc @0,@2
+	clr @2
 	clr @3
-	clr @4
 .endmacro
 
 
@@ -333,25 +334,33 @@ Function:
 	in yl, SPL
 	in yh, SPH
 ;-----------main Function-------
-	ldd r16, Y+4; temp = r21
+	ldd r16, Y+5; temp = r21
 	;r16 = temp
 
+T1:
 	cpi r16, 0b00110000 ;'0'
-	brlo endfunction
+	brsh T2
+	rjmp endfunction
+T2:
 	cpi r16, 0b01000100 ;'D'
-	brsh endfunction
+	brlo T3
+	rjmp endfunction
+T3:
 	cpi r16, 0b01000001 ; 'A'
 	brsh signtest2
+	rjmp Loadtest
 
 signtest2:
 	cpi sign,0
 	brne CalculateFirstSign
 setsign:
 	cpi r16, 0b01000011 ;'C'
-	breq result
+	brne setcontinue
+	rjmp result
+setcontinue:
 	ldi r17,0b01000000 ;'A'-1
 	sub r16,r17
-	mov sign r16
+	mov sign, r16
 	rjmp endfunction
 
 Loadtest:
@@ -360,7 +369,7 @@ Loadtest:
 
 	cpi sign, 0; initial, 1 + 2 -
 	breq loadA
-
+	rjmp loadB
 
 CalculateFirstSign:
 	ldi xl,low(A)
@@ -386,14 +395,14 @@ endCalculate:
 	mov sign, sign2
 	ldi xl,low(A)
 	ldi xh,high(A) 
-	st xl,r16
-	st xh,r17
+	st x+,r16
+	st x,r17
 	;initial B
 	clr r18
 	ldi xl,low(B)
 	ldi xh,high(B)
-	st xl,r18
-	st xh,r18
+	st x+,r18
+	st x,r18
 	rjmp setsign
 
 LoadB:
@@ -402,13 +411,15 @@ LoadB:
 	ld r16,x+
 	ld r17,x
 	tentimes r16,r17,r18,r19
-	sbi temp,ox30
+	ldi r24, 0x30
+	sub temp,r24
+	clr r24
 	add r16,temp
 
 	ldi xl,low(B)
 	ldi xh,high(B)
-	st xl,r16
-	st xh,r17
+	st x+,r16
+	st x,r17
 	rjmp endfunction
 loadA:
 	ldi xl,low(A)
@@ -416,13 +427,15 @@ loadA:
 	ld r16,x+
 	ld r17,x
 	tentimes r16,r17,r18,r19
-	sbi temp,ox30
+	ldi r24, 0x30
+	sub temp,r24
+	clr r24
 	add r16,temp
 
 	ldi xl,low(A)
 	ldi xh,high(A)
-	st xl,r16
-	st xh,r17
+	st x+,r16
+	st x,r17
 	rjmp endfunction
 
 result:
@@ -447,7 +460,7 @@ Forloop1:;reverse order
 	tentimes r20,r21,r24,r25
 	add r21,r5
 	adc r20,r4
-	cpi r16 1
+	cpi r16,1
 	brsh Forloop1
 	movw r17:r16,r21:r20
 	movw r19:r18, r17:r16
