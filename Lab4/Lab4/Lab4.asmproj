@@ -78,7 +78,25 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="clock.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="keypad.asm">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="lab4A.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LAB4B.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LAB4C.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LAB4C2.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lcd.asm">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
