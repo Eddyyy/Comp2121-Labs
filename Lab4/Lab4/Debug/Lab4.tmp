@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc</FILE>
  </INCLUDED_FILES>
@@ -22,48 +22,50 @@
   <FILE>Lab4.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <A><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>75</LINE></A>
-  <B><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>76</LINE></B>
-  <RESET><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>82</LINE></RESET>
-  <lcd_command><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>239</LINE></lcd_command>
-  <lcd_wait><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>269</LINE></lcd_wait>
-  <sleep_5ms><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>307</LINE></sleep_5ms>
-  <sleep_1ms><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>295</LINE></sleep_1ms>
-  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>113</LINE></main>
-  <colloop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>116</LINE></colloop>
-  <delay><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>121</LINE></delay>
-  <nextcol><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>141</LINE></nextcol>
-  <rowloop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>130</LINE></rowloop>
-  <skipconv><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>137</LINE></skipconv>
-  <convert><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>161</LINE></convert>
-  <Continue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>147</LINE></Continue>
-  <letters><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>174</LINE></letters>
-  <symbols><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>178</LINE></symbols>
-  <number_convert><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>193</LINE></number_convert>
-  <convert_end><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>197</LINE></convert_end>
-  <star><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>185</LINE></star>
-  <zero><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>188</LINE></zero>
-  <not_clean_line><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>206</LINE></not_clean_line>
-  <lcd_data><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>252</LINE></lcd_data>
-  <convert_ret><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>218</LINE></convert_ret>
-  <Function><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>317</LINE></Function>
-  <lcd_wait_loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>275</LINE></lcd_wait_loop>
-  <delayloop_1ms><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>300</LINE></delayloop_1ms>
-  <gotoEndFunction><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>358</LINE></gotoEndFunction>
-  <signtest2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>346</LINE></signtest2>
-  <CalculateFirstSign><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>372</LINE></CalculateFirstSign>
-  <setsign><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>349</LINE></setsign>
-  <gotoResult><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>360</LINE></gotoResult>
-  <endfunction><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>481</LINE></endfunction>
-  <ignore><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>362</LINE></ignore>
-  <result><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>437</LINE></result>
-  <Loadtest><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>364</LINE></Loadtest>
-  <loadA><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>421</LINE></loadA>
-  <subtract><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>386</LINE></subtract>
-  <endCalculate><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>391</LINE></endCalculate>
-  <LoadB><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>406</LINE></LoadB>
-  <Forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>447</LINE></Forloop1>
-  <display><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>463</LINE></display>
-  <displayloop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\LAB4C.asm</FILE><LINE>467</LINE></displayloop>
+  <A><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>76</LINE></A>
+  <B><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>77</LINE></B>
+  <S1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>78</LINE></S1>
+  <RESET><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>83</LINE></RESET>
+  <lcd_command><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>240</LINE></lcd_command>
+  <lcd_wait><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>270</LINE></lcd_wait>
+  <sleep_5ms><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>308</LINE></sleep_5ms>
+  <sleep_1ms><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>296</LINE></sleep_1ms>
+  <main><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>114</LINE></main>
+  <colloop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>117</LINE></colloop>
+  <delay><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>122</LINE></delay>
+  <nextcol><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>142</LINE></nextcol>
+  <rowloop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>131</LINE></rowloop>
+  <skipconv><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>138</LINE></skipconv>
+  <convert><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>162</LINE></convert>
+  <Continue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>148</LINE></Continue>
+  <letters><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>175</LINE></letters>
+  <symbols><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>179</LINE></symbols>
+  <number_convert><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>194</LINE></number_convert>
+  <convert_end><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>198</LINE></convert_end>
+  <star><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>186</LINE></star>
+  <zero><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>189</LINE></zero>
+  <not_clean_line><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>207</LINE></not_clean_line>
+  <lcd_data><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>253</LINE></lcd_data>
+  <convert_ret><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>219</LINE></convert_ret>
+  <Function><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>318</LINE></Function>
+  <lcd_wait_loop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>276</LINE></lcd_wait_loop>
+  <delayloop_1ms><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>301</LINE></delayloop_1ms>
+  <T1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>340</LINE></T1>
+  <T2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>344</LINE></T2>
+  <endfunction><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>491</LINE></endfunction>
+  <T3><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>348</LINE></T3>
+  <signtest2><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>353</LINE></signtest2>
+  <Loadtest><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>371</LINE></Loadtest>
+  <CalculateFirstSign><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>379</LINE></CalculateFirstSign>
+  <setsign><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>359</LINE></setsign>
+  <setcontinue><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>363</LINE></setcontinue>
+  <result><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>447</LINE></result>
+  <loadA><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>430</LINE></loadA>
+  <loadB><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>414</LINE></loadB>
+  <subtract><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>396</LINE></subtract>
+  <endCalculate><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>401</LINE></endCalculate>
+  <Forloop1><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>457</LINE></Forloop1>
+  <display><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>473</LINE></display>
+  <displayloop><FILE>C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm</FILE><LINE>477</LINE></displayloop>
  </LABELS>
 </ASSEMBLER_INFO>

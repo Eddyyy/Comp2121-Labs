@@ -15,7 +15,7 @@
     <Name>Lab4</Name>
     <RootNamespace>Lab1</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
-    <EntryFile>$(MSBuildProjectDirectory)\lab4A.asm</EntryFile>
+    <EntryFile>$(MSBuildProjectDirectory)\lab4Cfinal.asm</EntryFile>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
@@ -84,19 +84,22 @@
     <Compile Include="keypad.asm">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="lab4A.asm">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="LAB4B.asm">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="LAB4C.asm">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LAB4C2.asm">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Lab4c3.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="lab4Cfinal.asm">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="lcd.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main.asm">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
