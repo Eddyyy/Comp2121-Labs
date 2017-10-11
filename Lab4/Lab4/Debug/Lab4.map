@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm Wed Oct 11 14:17:00 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm Wed Oct 11 14:38:25 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1408,18 +1408,18 @@ EQU  DELAY_1MS    00000f9c
 CSEG delayloop_1ms 00000125
 CSEG T1           00000141
 CSEG T2           00000144
-CSEG endfunction  0000022d
+CSEG endfunction  0000022e
 CSEG T3           00000147
 CSEG signtest2    0000014a
 CSEG Loadtest     00000158
 CSEG CalculateFirstSign 0000015d
 CSEG setsign      0000014f
 CSEG setcontinue  00000152
-CSEG result       000001ae
+CSEG result       000001af
 CSEG loadA        00000194
 CSEG loadB        0000017a
 CSEG subtract     0000016d
 CSEG endCalculate 00000170
-CSEG Forloop1     000001b6
-CSEG display      000001f5
-CSEG displayloop  000001fb
+CSEG Forloop1     000001b7
+CSEG display      000001f6
+CSEG displayloop  000001fc

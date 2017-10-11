@@ -334,19 +334,19 @@ Function:
 	in yl, SPL
 	in yh, SPH
 ;-----------main Function-------
-	ldd r16, Y+5; temp = r21
+	ldd r21, Y+5; temp = r21
 	;r16 = temp
 
 T1:
-	cpi r16, 0b00110000 ;'0' could put'+'
+	cpi r21, 0b00110000 ;'0' could put'+'
 	brsh T2
 	rjmp endfunction
 T2:
-	cpi r16, 0b01000100 ;'D'
+	cpi r21, 0b01000100 ;'D'
 	brlo T3
 	rjmp endfunction
 T3:
-	cpi r16, 0b01000001 ; 'A'
+	cpi r21, 0b01000001 ; 'A'
 	brsh signtest2
 	rjmp Loadtest
 
@@ -357,15 +357,15 @@ signtest2:
 	cpi sign,0
 	brne CalculateFirstSign
 setsign:
-	cpi r16, 0b01000011 ;'C'
+	cpi r21, 0b01000011 ;'C'
 	brne setcontinue
 	rjmp result
 setcontinue:
 	ldi r17,0b01000000 ;'A'-1
-	sub r16,r17
+	sub r21,r17
 	ldi xl,low(S1)
 	ldi xh,high(S1)
-	st x, r16
+	st x, r21
 	rjmp endfunction
 
 Loadtest:
@@ -418,9 +418,9 @@ LoadB:
 	ld r17,x
 	tentimes r16,r17,r18,r19
 	ldi r24, 0x30
-	sub temp,r24
+	sub r21,r24
 	clr r24
-	add r16,temp
+	add r16,r21
 
 	ldi xl,low(B)
 	ldi xh,high(B)
@@ -434,9 +434,10 @@ loadA:
 	ld r17,x
 	tentimes r16,r17,r18,r19
 	ldi r24, 0x30
-	sub temp,r24
+	sub r21,r24
 	clr r24
-	add r16,temp
+	add r16,r21
+	adc r17, r24
 
 	ldi xl,low(A)
 	ldi xh,high(A)
@@ -505,3 +506,11 @@ endfunction:
 	pop XH
 	pop XL
 	ret
+
+
+
+
+	f = function(a,b)
+
+	f =a*b;
+	end function

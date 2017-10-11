@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm Wed Oct 11 14:17:00 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm Wed Oct 11 14:38:25 2017
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
 C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm(12): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.132\avrasm\inc\m2560def.inc'
@@ -2246,19 +2246,19 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm(12): Inc
 00013e b7cd                      	in yl, SPL
 00013f b7de                      	in yh, SPH
                                  ;-----------main Function-------
-000140 810d                      	ldd r16, Y+5; temp = r21
+000140 815d                      	ldd r21, Y+5; temp = r21
                                  	;r16 = temp
                                  
                                  T1:
-000141 3300                      	cpi r16, 0b00110000 ;'0'
+000141 3350                      	cpi r21, 0b00110000 ;'0' could put'+'
 000142 f408                      	brsh T2
-000143 c0e9                      	rjmp endfunction
+000143 c0ea                      	rjmp endfunction
                                  T2:
-000144 3404                      	cpi r16, 0b01000100 ;'D'
+000144 3454                      	cpi r21, 0b01000100 ;'D'
 000145 f008                      	brlo T3
-000146 c0e6                      	rjmp endfunction
+000146 c0e7                      	rjmp endfunction
                                  T3:
-000147 3401                      	cpi r16, 0b01000001 ; 'A'
+000147 3451                      	cpi r21, 0b01000001 ; 'A'
 000148 f408                      	brsh signtest2
 000149 c00e                      	rjmp Loadtest
                                  
@@ -2269,16 +2269,16 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm(12): Inc
 00014d 3080                      	cpi sign,0
 00014e f471                      	brne CalculateFirstSign
                                  setsign:
-00014f 3403                      	cpi r16, 0b01000011 ;'C'
+00014f 3453                      	cpi r21, 0b01000011 ;'C'
 000150 f409                      	brne setcontinue
-000151 c05c                      	rjmp result
+000151 c05d                      	rjmp result
                                  setcontinue:
 000152 e410                      	ldi r17,0b01000000 ;'A'-1
-000153 1b01                      	sub r16,r17
+000153 1b51                      	sub r21,r17
 000154 e0a4                      	ldi xl,low(S1)
 000155 e0b2                      	ldi xh,high(S1)
-000156 930c                      	st x, r16
-000157 c0d5                      	rjmp endfunction
+000156 935c                      	st x, r21
+000157 c0d6                      	rjmp endfunction
                                  
                                  Loadtest:
 000158 819a                      	ldd r25, Y+2
@@ -2342,15 +2342,15 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm(12): Inc
 000189 2722
 00018a 2733                      	tentimes r16,r17,r18,r19
 00018b e380                      	ldi r24, 0x30
-00018c 1b58                      	sub temp,r24
+00018c 1b58                      	sub r21,r24
 00018d 2788                      	clr r24
-00018e 0f05                      	add r16,temp
+00018e 0f05                      	add r16,r21
                                  
 00018f e0a2                      	ldi xl,low(B)
 000190 e0b2                      	ldi xh,high(B)
 000191 930d                      	st x+,r16
 000192 931c                      	st x,r17
-000193 c099                      	rjmp endfunction
+000193 c09a                      	rjmp endfunction
                                  loadA:
 000194 e0a0                      	ldi xl,low(A)
 000195 e0b2                      	ldi xh,high(A)
@@ -2370,166 +2370,167 @@ C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab4\Lab4\lab4Cfinal.asm(12): Inc
 0001a3 2722
 0001a4 2733                      	tentimes r16,r17,r18,r19
 0001a5 e380                      	ldi r24, 0x30
-0001a6 1b58                      	sub temp,r24
+0001a6 1b58                      	sub r21,r24
 0001a7 2788                      	clr r24
-0001a8 0f05                      	add r16,temp
+0001a8 0f05                      	add r16,r21
+0001a9 1f18                      	adc r17, r24
                                  
-0001a9 e0a0                      	ldi xl,low(A)
-0001aa e0b2                      	ldi xh,high(A)
-0001ab 930d                      	st x+,r16
-0001ac 931c                      	st x,r17
-0001ad c07f                      	rjmp endfunction
+0001aa e0a0                      	ldi xl,low(A)
+0001ab e0b2                      	ldi xh,high(A)
+0001ac 930d                      	st x+,r16
+0001ad 931c                      	st x,r17
+0001ae c07f                      	rjmp endfunction
                                  
                                  result:
-0001ae e0a0                      	ldi xl,low(A)
-0001af e0b2                      	ldi xh,high(A)
-0001b0 910d                      	ld r16,x+
-0001b1 911c                      	ld r17,x
-0001b2 2444                      	clr r4
-0001b3 2455                      	clr r5
-0001b4 2744                      	clr r20
-0001b5 2755                      	clr r21
+0001af e0a0                      	ldi xl,low(A)
+0001b0 e0b2                      	ldi xh,high(A)
+0001b1 910d                      	ld r16,x+
+0001b2 911c                      	ld r17,x
+0001b3 2444                      	clr r4
+0001b4 2455                      	clr r5
+0001b5 2744                      	clr r20
+0001b6 2755                      	clr r21
                                  
                                  Forloop1:;reverse order
-0001b6 0198                      	movw r19:r18, r17:r16
-0001b7 01c9
-0001b8 9596
-0001b9 9587
-0001ba 9536
-0001bb 9527
-0001bc 9536
-0001bd 9527
-0001be 9536
-0001bf 9527
-0001c0 1b39
-0001c1 0b28
-0001c2 2788
-0001c3 2799                      	DivideTenTimes r18,r19,r24,r25
-0001c4 01c9
-0001c5 0f88
-0001c6 1f99
-0001c7 0f22
-0001c8 1f33
-0001c9 0f22
-0001ca 1f33
-0001cb 0f22
-0001cc 1f33
-0001cd 0f28
-0001ce 1f39
-0001cf 2788
-0001d0 2799                      	tentimes r18,r19,r24,r25
-0001d1 0128                      	movw r5:r4,r17:r16
-0001d2 1a53                      	sub r5,r19
-0001d3 0a42                      	sbc r4,r18
-0001d4 01c9
-0001d5 9596
-0001d6 9587
-0001d7 9536
-0001d8 9527
-0001d9 9536
-0001da 9527
-0001db 9536
-0001dc 9527
-0001dd 1b39
-0001de 0b28
-0001df 2788
-0001e0 2799                      	DivideTenTimes r18,r19,r24,r25
-0001e1 0189                      	movw r17:r16,r19:r18
-0001e2 01ca
-0001e3 0f88
-0001e4 1f99
-0001e5 0f44
-0001e6 1f55
-0001e7 0f44
-0001e8 1f55
-0001e9 0f44
-0001ea 1f55
-0001eb 0f48
-0001ec 1f59
-0001ed 2788
-0001ee 2799                      	tentimes r20,r21,r24,r25
-0001ef 0d55                      	add r21,r5
-0001f0 1d44                      	adc r20,r4
-0001f1 3001                      	cpi r16,1
-0001f2 f618                      	brsh Forloop1
-0001f3 018a                      	movw r17:r16,r21:r20
-0001f4 0198                      	movw r19:r18, r17:r16
+0001b7 0198                      	movw r19:r18, r17:r16
+0001b8 01c9
+0001b9 9596
+0001ba 9587
+0001bb 9536
+0001bc 9527
+0001bd 9536
+0001be 9527
+0001bf 9536
+0001c0 9527
+0001c1 1b39
+0001c2 0b28
+0001c3 2788
+0001c4 2799                      	DivideTenTimes r18,r19,r24,r25
+0001c5 01c9
+0001c6 0f88
+0001c7 1f99
+0001c8 0f22
+0001c9 1f33
+0001ca 0f22
+0001cb 1f33
+0001cc 0f22
+0001cd 1f33
+0001ce 0f28
+0001cf 1f39
+0001d0 2788
+0001d1 2799                      	tentimes r18,r19,r24,r25
+0001d2 0128                      	movw r5:r4,r17:r16
+0001d3 1a53                      	sub r5,r19
+0001d4 0a42                      	sbc r4,r18
+0001d5 01c9
+0001d6 9596
+0001d7 9587
+0001d8 9536
+0001d9 9527
+0001da 9536
+0001db 9527
+0001dc 9536
+0001dd 9527
+0001de 1b39
+0001df 0b28
+0001e0 2788
+0001e1 2799                      	DivideTenTimes r18,r19,r24,r25
+0001e2 0189                      	movw r17:r16,r19:r18
+0001e3 01ca
+0001e4 0f88
+0001e5 1f99
+0001e6 0f44
+0001e7 1f55
+0001e8 0f44
+0001e9 1f55
+0001ea 0f44
+0001eb 1f55
+0001ec 0f48
+0001ed 1f59
+0001ee 2788
+0001ef 2799                      	tentimes r20,r21,r24,r25
+0001f0 0d55                      	add r21,r5
+0001f1 1d44                      	adc r20,r4
+0001f2 3001                      	cpi r16,1
+0001f3 f618                      	brsh Forloop1
+0001f4 018a                      	movw r17:r16,r21:r20
+0001f5 0198                      	movw r19:r18, r17:r16
                                  display:
-0001f5 e001
-0001f6 defd
-0001f7 df16                      	do_lcd_command 0b00000001 ; clear display
-0001f8 e00e
-0001f9 defa
-0001fa df13                      	do_lcd_command 0b00001110 ; Cursor on, bar, no blink
+0001f6 e001
+0001f7 defc
+0001f8 df15                      	do_lcd_command 0b00000001 ; clear display
+0001f9 e00e
+0001fa def9
+0001fb df12                      	do_lcd_command 0b00001110 ; Cursor on, bar, no blink
                                  
                                  displayloop:
-0001fb 01c9
-0001fc 9596
-0001fd 9587
-0001fe 9536
-0001ff 9527
-000200 9536
-000201 9527
-000202 9536
-000203 9527
-000204 1b39
-000205 0b28
-000206 2788
-000207 2799                      	DivideTenTimes r18,r19,r24,r25
-000208 01c9
-000209 0f88
-00020a 1f99
-00020b 0f22
-00020c 1f33
-00020d 0f22
-00020e 1f33
-00020f 0f22
-000210 1f33
-000211 0f28
-000212 1f39
-000213 2788
-000214 2799                      	tentimes r18,r19,r24,r25	
-000215 0128                      	movw r5:r4,r17:r16
-000216 1a53                      	sub r5,r19
-000217 0a42                      	sbc r4,r18
-000218 e340                      	ldi r20,0x30
-000219 0e44                      	add r4,r20
-00021a 2d04
-00021b dee3
-00021c def1                      	do_lcd_data r4
-00021d 01c9
-00021e 9596
-00021f 9587
-000220 9536
-000221 9527
-000222 9536
-000223 9527
-000224 9536
-000225 9527
-000226 1b39
-000227 0b28
-000228 2788
-000229 2799                      	DivideTenTimes r18,r19,r24,r25
-00022a 0189                      	movw r17:r16,r19:r18
-00022b 3001                      	cpi r16, 1
-00022c f670                      	brsh displayloop
+0001fc 01c9
+0001fd 9596
+0001fe 9587
+0001ff 9536
+000200 9527
+000201 9536
+000202 9527
+000203 9536
+000204 9527
+000205 1b39
+000206 0b28
+000207 2788
+000208 2799                      	DivideTenTimes r18,r19,r24,r25
+000209 01c9
+00020a 0f88
+00020b 1f99
+00020c 0f22
+00020d 1f33
+00020e 0f22
+00020f 1f33
+000210 0f22
+000211 1f33
+000212 0f28
+000213 1f39
+000214 2788
+000215 2799                      	tentimes r18,r19,r24,r25	
+000216 0128                      	movw r5:r4,r17:r16
+000217 1a53                      	sub r5,r19
+000218 0a42                      	sbc r4,r18
+000219 e340                      	ldi r20,0x30
+00021a 0e44                      	add r4,r20
+00021b 2d04
+00021c dee2
+00021d def0                      	do_lcd_data r4
+00021e 01c9
+00021f 9596
+000220 9587
+000221 9536
+000222 9527
+000223 9536
+000224 9527
+000225 9536
+000226 9527
+000227 1b39
+000228 0b28
+000229 2788
+00022a 2799                      	DivideTenTimes r18,r19,r24,r25
+00022b 0189                      	movw r17:r16,r19:r18
+00022c 3001                      	cpi r16, 1
+00022d f670                      	brsh displayloop
                                  	
                                  endfunction:
-00022d 919f                      	pop r25
-00022e 918f                      	pop r24
-00022f 917f                      	pop r23
-000230 916f                      	pop r22
-000231 915f                      	pop r21
-000232 914f                      	pop r20
-000233 913f                      	pop r19
-000234 912f                      	pop r18
-000235 911f                      	pop r17
-000236 910f                      	pop r16
+00022e 919f                      	pop r25
+00022f 918f                      	pop r24
+000230 917f                      	pop r23
+000231 916f                      	pop r22
+000232 915f                      	pop r21
+000233 914f                      	pop r20
+000234 913f                      	pop r19
+000235 912f                      	pop r18
+000236 911f                      	pop r17
+000237 910f                      	pop r16
                                  
-000237 91df                      	pop YH
-000238 91cf                      	pop YL
-000239 91bf                      	pop XH
-00023a 91af                      	pop XL
+000238 91df                      	pop YH
+000239 91cf                      	pop YL
+00023a 91bf                      	pop XH
+00023b 91af                      	pop XL
 
 
 RESOURCE USE INFORMATION
@@ -2549,13 +2550,13 @@ counted separately from r26..r31 here.
 "ATmega2560" register use summary:
 x  :  21 y  :   4 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   8 
 r5 :   6 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  65 r17:  38 r18:  59 r19:  55 r20:  14 
-r21:  45 r22:   5 r23:   6 r24:  47 r25:  36 r26:  14 r27:  14 r28:   4 
+r13:   0 r14:   0 r15:   0 r16:  58 r17:  39 r18:  59 r19:  55 r20:  14 
+r21:  52 r22:   5 r23:   6 r24:  48 r25:  36 r26:  14 r27:  14 r28:   4 
 r29:   4 r30:   0 r31:   0 
 Registers used: 18 out of 35 (51.4%)
 
 "ATmega2560" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   7 add   :  14 adiw  :   0 and   :   1 
+.lds  :   0 .sts  :   0 adc   :   8 add   :  14 adiw  :   0 and   :   1 
 andi  :   1 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   7 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 
@@ -2580,7 +2581,7 @@ Instructions used: 41 out of 116 (35.3%)
 "ATmega2560" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000478    920      0    920  262144   0.4%
+[.cseg] 0x000000 0x00047a    922      0    922  262144   0.4%
 [.dseg] 0x000200 0x000205      0      5      5    8192   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    4096   0.0%
 
