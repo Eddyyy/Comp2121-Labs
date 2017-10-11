@@ -41,15 +41,15 @@
 .endmacro
 
 .macro tentimes
-	movw @4:@3,@2:@1
-	doubleNum @3,@4
-	doubleNum @1,@2
-	doubleNum @1,@2
-	doubleNum @1,@2
-	add @1,@3
-	adc @2,@4
+	movw @3:@2,@1:@0
+	doubleNum @2,@3
+	doubleNum @0,@1
+	doubleNum @0,@1
+	doubleNum @0,@1
+	add @0,@2
+	adc @1,@3
+	clr @2
 	clr @3
-	clr @4
 .endmacro
 
 .macro HalveNum
@@ -58,15 +58,15 @@
 .endmacro
 
 .macro DivideTenTimes
-	movw @4:@3,@2:@1
-	HalveNum @4,@3
-	HalveNum @2,@1
-	HalveNum @2,@1
-	HalveNum @2,@1
-	sub @2,@4
-	sbc @1,@3
+	movw @3:@2,@1:@0
+	HalveNum @3,@2
+	HalveNum @1,@0
+	HalveNum @1,@0
+	HalveNum @1,@0
+	sub @1,@3
+	sbc @0,@2
+	clr @2
 	clr @3
-	clr @4
 .endmacro
 
 
@@ -139,7 +139,7 @@ inc row ; else move to the next row
 lsl mask ; shift the mask to the next bit
 jmp rowloop          
 nextcol:     
-cpi col, 3 ; check if we^Òre on the last column
+cpi col, 3 ; check if we are on the last column
 brne Continue ; if so, no buttons were pushed,
 ; so start again.
 clr flag
@@ -351,7 +351,7 @@ setsign:
 	breq result
 	ldi r17,0b01000000 ;'A'-1
 	sub r16,r17
-	mov sign r16
+	mov sign, r16
 	rjmp endfunction
 
 Loadtest:
@@ -401,8 +401,8 @@ LoadB:
 	ldi xh,high(B)
 	ld r16,x+
 	ld r17,x
-	tentimes r16,r17,r18,r19
-	sbi temp,ox30
+	tentimes r16, r17, r18, r19
+	sbi temp,0x30
 	add r16,temp
 
 	ldi xl,low(B)
@@ -416,7 +416,7 @@ loadA:
 	ld r16,x+
 	ld r17,x
 	tentimes r16,r17,r18,r19
-	sbi temp,ox30
+	sbi temp,0x30
 	add r16,temp
 
 	ldi xl,low(A)
@@ -447,7 +447,7 @@ Forloop1:;reverse order
 	tentimes r20,r21,r24,r25
 	add r21,r5
 	adc r20,r4
-	cpi r16 1
+	cpi r16, 1
 	brsh Forloop1
 	movw r17:r16,r21:r20
 	movw r19:r18, r17:r16
