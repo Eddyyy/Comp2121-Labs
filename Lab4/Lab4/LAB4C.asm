@@ -337,9 +337,9 @@ Function:
 	;r16 = temp
 
 	cpi r16, 0b00110000 ;'0'
-	brlo endfunction
+	brlo gotoEndFunction ;too far for a relative jump to go straight to endfunction
 	cpi r16, 0b01000100 ;'D'
-	brsh endfunction
+	brsh gotoEndFunction
 	cpi r16, 0b01000001 ; 'A'
 	brsh signtest2
 
@@ -348,11 +348,18 @@ signtest2:
 	brne CalculateFirstSign
 setsign:
 	cpi r16, 0b01000011 ;'C'
-	breq result
+	breq gotoResult ;too far for a relative jump to go straight to result
 	ldi r17,0b01000000 ;'A'-1
 	sub r16,r17
 	mov sign, r16
 	rjmp endfunction
+
+rjmp ignore
+gotoEndFunction:
+	jmp endfunction
+gotoResult:
+	jmp result
+ignore:
 
 Loadtest:
 	ldd r25, Y+2
@@ -402,7 +409,8 @@ LoadB:
 	ld r16,x+
 	ld r17,x
 	tentimes r16, r17, r18, r19
-	sbi temp,0x30
+	sbi temp, 5 ; 0x30 == 0b00110000
+	sbi temp, 6 ; might be better to do ldi temp, (1<<5)||(1<<6)
 	add r16,temp
 
 	ldi xl,low(B)
@@ -416,7 +424,8 @@ loadA:
 	ld r16,x+
 	ld r17,x
 	tentimes r16,r17,r18,r19
-	sbi temp,0x30
+	sbi temp, 5 ; 0x30 == 0b00110000
+	sbi temp, 6 ; might be better to do ldi temp, (1<<5)||(1<<6)
 	add r16,temp
 
 	ldi xl,low(A)
