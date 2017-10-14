@@ -172,18 +172,6 @@ EndIF:
     out SREG, temp
     reti            ; Return from the interrupt.
 
-
-
-
-
-
-
-
-
-
-
-
-
 main:
     clear TempCounter       ; Initialize the temporary counter to 0
 	clear MSCounter
@@ -214,33 +202,29 @@ convert_digits:
 	push digit
 
 	checkHundreds:
-		cpi temp, 100			; is the number still > 100?
-		brsh hundredsDigit		; if YES - increase hundreds digit
+		cpi temp, 100			
+		brsh hundredsDigit		
 		cpi digit, 0			
-		brne pushHundredsDigit	; If digit ! 0 => this digit goes into stack
+		brne pushHundredsDigit	
 		
 	checkTensInit:
 		clr digit
 	checkTens:
 		ldi temp1, 10
-		cp temp, temp1			; is the number still > 10? 
-		brsh tensDigit			; if YES - increase tens digit
-		cpi digitc, 1		; were there hundred digits?
-		breq pushTensDigit		; if YES i.e. digitCount==1 -> push the tens digit even if 0
-								; otherwise: no hundreds are present
-		cpi digit, 0			; is tens digit = 0?
-		brne pushTensDigit		; if digit != 0 push it to the stack			 
+		cp temp, temp1			
+		brsh tensDigit			
+		cpi digitc, 1		
+		breq pushTensDigit		
+								
+		cpi digit, 0			
+		brne pushTensDigit				 
 
 	saveOnes:
-		clr digit				; ones are always saved in stack
-		mov digit, temp			; whatever is left in temp is the ones digit
+		clr digit				
+		mov digit, temp			
 		push digit				
 		inc digitc
-	; now all digit temp data is in the stack
-	; unload data into temp2, temp1, temp
-	; and the do_lcd_rdata in reverse order
-	; this will display the currentNumber value to LCD
-	; it's not an elegant solution but will do for now
+
 	cpi digitc, 3
 	breq dispThreeDigits
 	cpi digitc, 2
@@ -255,15 +239,15 @@ convert_digits:
 
 ; hundreds digit
 hundredsDigit:
-	inc digit				; if YES increase the digit count
-	subi temp, 100			; and subtract a 100 from the number
-	rjmp checkHundreds		; check hundreds again
+	inc digit				
+	subi temp, 100			
+	rjmp checkHundreds		
 
 ; tens digit
 tensDigit:
-	inc digit				; if YES increase the digit count
-	subi temp, 10			; and subtract a 10 from the number
-	rjmp checkTens			; check tens again
+	inc digit				
+	subi temp, 10			
+	rjmp checkTens			
 
 pushHundredsDigit:
 	push digit
