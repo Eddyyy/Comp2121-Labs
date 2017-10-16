@@ -15,8 +15,7 @@
     <Name>Lab5</Name>
     <RootNamespace>Lab5</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
-    <EntryFile>
-    </EntryFile>
+    <EntryFile>$(MSBuildProjectDirectory)\Lab5B-PWM.asm</EntryFile>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
@@ -67,6 +66,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Lab5A-speed.asm">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lab5B-PWM.asm">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
