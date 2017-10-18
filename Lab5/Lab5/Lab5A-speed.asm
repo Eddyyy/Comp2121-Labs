@@ -20,7 +20,15 @@
     st Y+, temp         ; clear the two bytes at @0 in SRAM
     st Y, temp
 .endmacro
-                        
+
+.macro divide_by 
+	mov temp, @0
+	lsl temp
+	lsr @0
+	add @0, temp
+	clr temp
+.endmacro
+			            
 .dseg
 TempCounter: .byte 2              ; Temporary counter. check if 100ms has passed
 VoltageFlag: .byte 1
@@ -133,9 +141,9 @@ Timer0OVF:
     lds r27, MSCounter+1
     adiw r27:r26, 1
 
-	cpi r26, low(781)
+	cpi r24, low(781)
 	ldi temp, high(781)
-	cpc r27, temp
+	cpc r25, temp
 	brne NotSecond
 
 	do_lcd_command 0b00000001 ; clear display
@@ -144,10 +152,12 @@ Timer0OVF:
 
 	do_lcd_digits show
 	clear MSCounter
-	inc r31
-	cpi r31, 10
-	brne ENDIF
+	;inc r31
+	;cpi r31, 10
+	;brne ENDIF
 
+	;divide 2.5 here
+	divide_by counter
 	mov show, counter
 	clr counter
 	clear TempCounter

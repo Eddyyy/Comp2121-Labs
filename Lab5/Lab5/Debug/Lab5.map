@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab5\Lab5\Lab5B-PWM.asm Tue Oct 17 21:20:27 2017
+AVRASM ver. 2.2.6  C:\Users\Edward\Documents\GitHub\Comp2121-Labs\Lab5\Lab5\Lab5B.asm Wed Oct 18 14:43:23 2017
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1360,5 +1360,63 @@ EQU  UDRE3addr    0000006e
 EQU  UTXC3addr    00000070
 EQU  INT_VECTORS_SIZE 00000072
 DEF  temp         r16
-CSEG RESET        00000002
-CSEG halt         00000011
+DEF  speed        r17
+DEF  number       r18
+DEF  counter      r19
+DEF  value        r21
+DEF  input        r22
+DEF  target       r23
+DEF  flag         r31
+SET  LCD_DISP_ON  0000000e
+SET  LCD_DISP_OFF 00000008
+SET  LCD_DISP_CLR 00000001
+SET  LCD_FUNC_SET 00000038
+SET  LCD_ENTR_SET 00000006
+SET  LCD_HOME_LINE 00000080
+SET  LCD_SEC_LINE 000000a8
+DSEG Zero         00000200
+DSEG DebounceCounter 00000201
+DSEG TC           00000203
+CSEG RESET        00000033
+CSEG PB_0         0000008b
+CSEG PB_1         00000093
+CSEG motor_speed  00000129
+CSEG Timer0OVF    0000009b
+CSEG DEFAULT      00000032
+CSEG lcd_command  0000012f
+CSEG lcd_wait     0000013f
+CSEG sleep_5ms    00000159
+CSEG sleep_1ms    00000150
+CSEG main         00000066
+CSEG loop         0000008a
+CSEG DecreaseSpeed 0000008e
+CSEG return0      00000092
+CSEG IncreaseSpeed 00000096
+CSEG return1      0000009a
+CSEG SetDebounceFlag 000000af
+CSEG TimeCounter  000000b5
+CSEG NotaSecond   000000dc
+CSEG updataSpeed  000000be
+CSEG continue     000000c4
+CSEG UpdateTime   000000d5
+CSEG decrease     000000d0
+CSEG UpdateSpeed  000000e7
+CSEG Endif        000000e0
+CSEG display      000000f6
+CSEG Dloop        000000f7
+CSEG hunderd      0000010b
+CSEG ten          00000117
+CSEG go           00000105
+CSEG lcd_data     00000136
+CSEG return       00000109
+CSEG Hloop        0000010f
+CSEG showNumber   00000123
+CSEG Tloop        0000011b
+EQU  F_CPU        00f42400
+EQU  DELAY_1MS    00000f9c
+EQU  LCD_RS       00000007
+EQU  LCD_E        00000006
+EQU  LCD_RW       00000005
+EQU  LCD_BE       00000004
+CSEG lcd_wait_loop 00000144
+CSEG delayloop_1ms 00000154
